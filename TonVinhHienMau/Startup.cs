@@ -13,6 +13,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TonVinhHienMau.Data;
+using TonVinhHienMau.Services.Implement;
+using TonVinhHienMau.Services.Service;
 
 namespace TonVinhHienMau
 {
@@ -36,6 +38,8 @@ namespace TonVinhHienMau
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TonVinhHienMau", Version = "v1" });
             });
+            services.AddTransient<ITonVinhHienMau, TonVinhHienMauimpl>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -11,6 +11,7 @@ namespace TonVinhHienMau.Data
 
         }
         public DbSet<NguoiHienMau> NguoiHienMau { get; set; }
+        public DbSet<DonVi> DonVi { get; set; }
 
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TonVinhHienMau.Models
 {
@@ -7,21 +9,23 @@ namespace TonVinhHienMau.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [MaxLength(500)]
+        [Column(TypeName = "nvarchar(500)")]
         public string HoTen { get; set; }
 
-        [Required]
         public bool GioiTinh { get; set; }
 
-        [Required]
+        [MaxLength(50)]
+        [Column(TypeName = "varchar(50)")]
         public int NamSinh { get; set; }
 
-        [Required]
+        [MaxLength(500)]
+        [Column(TypeName = "nvarchar(500)")]
         public string NgheNghiep { get; set; }
 
-        [Required]
+        [MaxLength(500)]
+        [Column(TypeName = "nvarchar(500)")]
         public string DiaChi { get; set; }
-
 
         public string TV_5 { get; set; }
 
@@ -85,5 +89,9 @@ namespace TonVinhHienMau.Models
 
         public int NamTV_100 { get; set; }
 
+        public Guid? DonViId { get; set; }
+
+        [ForeignKey("DonViId")]
+        public virtual DonVi DonVis { get; set; }
     }
 }
