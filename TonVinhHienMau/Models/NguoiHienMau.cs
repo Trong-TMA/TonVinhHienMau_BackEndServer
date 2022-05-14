@@ -7,7 +7,7 @@ namespace TonVinhHienMau.Models
     public class NguoiHienMau
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [MaxLength(500)]
         [Column(TypeName = "nvarchar(500)")]
@@ -93,5 +93,10 @@ namespace TonVinhHienMau.Models
 
         [ForeignKey("DonViId")]
         public virtual DonVi DonVis { get; set; }
+
+        public Guid? DotTonVinhId { get; set; }
+
+        [ForeignKey("DotTonVinhId")]
+        public virtual DotTonVinh DotTonVinh { get; set; }
     }
 }
