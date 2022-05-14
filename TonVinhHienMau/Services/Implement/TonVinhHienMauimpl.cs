@@ -40,18 +40,6 @@ namespace TonVinhHienMau.Services.Implement
                 TV_80 = u.TV_80,
                 TV_90 = u.TV_90,
                 TV_100 = u.TV_100,
-                NamTV_5 = u.NamTV_5,
-                NamTV_10 = u.NamTV_10,
-                NamTV_15 = u.NamTV_15,
-                NamTV_20 = u.NamTV_20,
-                NamTV_30 = u.NamTV_30,
-                NamTV_40 = u.NamTV_40,
-                NamTV_50 = u.NamTV_50,
-                NamTV_60 = u.NamTV_60,
-                NamTV_70 = u.NamTV_70,
-                NamTV_80 = u.NamTV_80,
-                NamTV_90 = u.NamTV_90,
-                NamTV_100 = u.NamTV_100,
             }).ToList();
             if (nguoihienmaus != null)
             {
@@ -81,6 +69,7 @@ namespace TonVinhHienMau.Services.Implement
                     return ReadExcel(worksheet, rowCount, colCount, rowStart, DonVi.MaDonVi, NamTV.MaDotTonVinh);
                 }
             }
+            return null;
         }
         private List<NguoiHienMauVm> ReadExcel(ExcelWorksheet worksheet, int rowCount, int colCount, int rowStart, string maDonVi, string maDotTonVinh)
         {
@@ -88,6 +77,7 @@ namespace TonVinhHienMau.Services.Implement
             {
                 
             }
+            return null;
         }
         private RowDataVm getRowData(ExcelWorksheet worksheet,int row, int col)
         {
