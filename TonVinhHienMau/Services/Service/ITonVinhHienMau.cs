@@ -11,7 +11,9 @@ namespace TonVinhHienMau.Services.Service
 {
     public interface ITonVinhHienMau
     {
-        List<NguoiHienMauVm> GetAll(AppDbContext _context);
-        Task<NguoiHienMauVm> CheckExist(AppDbContext _context, string Hoten, int NamSinh);
+        public List<NguoiHienMauVm> GetAll(AppDbContext _context);
+        public List<NguoiHienMauVm> ImportExcel(AppDbContext _context, IFormFile file, Guid DonviId, Guid DotTonVinhId);
+
+
     }
 }

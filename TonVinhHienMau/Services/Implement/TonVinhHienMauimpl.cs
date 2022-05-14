@@ -1,6 +1,7 @@
 ﻿using ClosedXML.Excel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -62,10 +63,72 @@ namespace TonVinhHienMau.Services.Implement
             }
         }
 
-
-        public Task<NguoiHienMauVm> CheckExist(AppDbContext _context, string Hoten, int NamSinh)
+        public List<NguoiHienMauVm> ImportExcel(AppDbContext _context, IFormFile file, Guid donviId, Guid dotTonVinhId)
         {
-            throw new System.NotImplementedException();
+
+            if (file?.Length > 0)
+            {
+                var DonVi = _context.DonVi.FirstOrDefault(u => u.Id.Equals(donviId));
+                var NamTV = _context.DotTonVinh.FirstOrDefault(u => u.Id.Equals(dotTonVinhId));
+                var stream = file.OpenReadStream();
+
+                using (var package = new ExcelPackage(stream))
+                {
+                    var worksheet = package.Workbook.Worksheets.First();
+                    var rowCount = worksheet.Dimension.Rows;
+                    int colCount = worksheet.Dimension.Columns;
+                    int rowStart = 4;
+                    return ReadExcel(worksheet, rowCount, colCount, rowStart, DonVi.MaDonVi, NamTV.MaDotTonVinh);
+                }
+            }
+        }
+        private List<NguoiHienMauVm> ReadExcel(ExcelWorksheet worksheet, int rowCount, int colCount, int rowStart, string maDonVi, string maDotTonVinh)
+        {
+            for (var row = rowStart; row <= rowCount; row++)
+            {
+                
+            }
+        }
+        private RowDataVm getRowData(ExcelWorksheet worksheet,int row, int col)
+        {
+            var hoten = worksheet.Cells[row, col].Value?.ToString().Trim();
+            var gioitinh = worksheet.Cells[row, col].Value?.ToString().Trim();
+            var namsinh = worksheet.Cells[row, col].Value?.ToString().Trim();
+            var nghenghiep = worksheet.Cells[row, col].Value?.ToString().Trim();
+            var diachi = worksheet.Cells[row, col].Value?.ToString().Trim();
+            var tv_5 = worksheet.Cells[row, col].Value?.ToString().Trim();
+            var tv_10 = worksheet.Cells[row, col].Value?.ToString().Trim();
+            var tv_15 = worksheet.Cells[row, col].Value?.ToString().Trim();
+            var tv_20 = worksheet.Cells[row, col].Value?.ToString().Trim();
+            var tv_30 = worksheet.Cells[row, col].Value?.ToString().Trim();
+            var tv_40 = worksheet.Cells[row, col].Value?.ToString().Trim();
+            var tv_50 = worksheet.Cells[row, col].Value?.ToString().Trim();
+            var tv_60 = worksheet.Cells[row, col].Value?.ToString().Trim();
+            var tv_70 = worksheet.Cells[row, col].Value?.ToString().Trim();
+            var tv_80 = worksheet.Cells[row, col].Value?.ToString().Trim();
+            var tv_90 = worksheet.Cells[row, col].Value?.ToString().Trim();
+            var tv_100 = worksheet.Cells[row, col].Value?.ToString().Trim();
+
+            return new RowDataVm()
+            {
+                HoTen = hoten,
+                GioiTinh = Boolean.Parse(gioitinh),
+                NamSinh = Int32.Parse(namsinh),
+                NgheNghiep = nghenghiep,
+                TV_5 = tv_5,
+                TV_10 = tv_10,
+                TV_15 = tv_15,
+                TV_20 = tv_20,
+                TV_30 = tv_30,
+                TV_40 = tv_40,
+                TV_50 = tv_50,
+                TV_60 = tv_60,
+                TV_70 = tv_70,
+                TV_80 = tv_80,
+                TV_90 = tv_90,
+                TV_100 = tv_100
+            };
+
         }
     }
 }
