@@ -33,8 +33,14 @@ namespace TonVinhHienMau.Controllers
         [HttpGet("getAll")]
         public IActionResult GetAll()
         {
-            var nguoihienmaus = _tonVinhHienMau.GetAll(_context);
-            return new JsonResult(nguoihienmaus);
+            return new JsonResult(_context.NguoiHienMau);
+        }
+
+        [HttpPost("Import")]
+        public IActionResult Import(Guid? DonviId, Guid? DotTonVinhId, IFormFile file)
+        {
+            var result = _tonVinhHienMau.ImportExcel(_context,file,DonviId,DotTonVinhId);
+            return new JsonResult(result);
         }
 
         [HttpPost("ExportALL")]

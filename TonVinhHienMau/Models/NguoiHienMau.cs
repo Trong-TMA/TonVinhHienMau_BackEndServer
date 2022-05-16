@@ -13,7 +13,7 @@ namespace TonVinhHienMau.Models
         [Column(TypeName = "nvarchar(500)")]
         public string HoTen { get; set; }
 
-        public bool GioiTinh { get; set; }
+        public bool? GioiTinh { get; set; }
 
         [MaxLength(50)]
         [Column(TypeName = "varchar(50)")]
