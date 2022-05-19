@@ -10,12 +10,10 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
-import { DotTonVinhComponent } from './pages/dot-ton-vinh/dot-ton-vinh.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DotTonVinhComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +24,7 @@ import { DotTonVinhComponent } from './pages/dot-ton-vinh/dot-ton-vinh.component
     NzLayoutModule,
     NzMenuModule,
     DashboardRoutingModule,
-    NzBreadCrumbModule
+    NzBreadCrumbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
