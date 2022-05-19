@@ -1,7 +1,22 @@
 .layout {
   min-height: 100vh;
 }
-
+li{
+  text-align: left;
+  padding: 10px;
+  width: max-content;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+span:hover{
+  color: #01645a
+}
+a{
+  color: #01645a
+}
+a:hover{
+  color: #01645a
+}
 .banner-wrapper{
   width: 100%;
   max-width: 1600px;
@@ -11,21 +26,23 @@
   width: 100%;
   object-fit: cover;
 }
-nz-header {
-  position: fixed;
-  width: 100%;
-  height: auto;
-  background-color: white;
-}
 
-[nz-menu] {
-  line-height: inherit;
+nz-header {
+  width: 100%;
+  height: fit-content;
+  background-color: #fff;
 }
 
 nz-content {
   padding: 0 50px;
   margin-top: 64px;
+  height: fit-content;
 }
+[nz-menu] {
+  line-height: 64px;
+}
+
+
 
 nz-breadcrumb {
   margin: 16px 0;
@@ -44,9 +61,6 @@ nz-footer {
 [nz-menu] {
   width: auto;
   font-weight: 500;
+  color: #01645a
 }
 
-[nzTitle]{
-  font-weight: 500;
-  color: black;
-}

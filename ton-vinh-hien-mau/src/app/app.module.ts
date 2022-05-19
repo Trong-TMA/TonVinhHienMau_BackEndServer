@@ -1,3 +1,5 @@
+import { DotTonVinhRoutingModule } from './pages/dot-ton-vinh/dot-ton-vinh-routing.module';
+import { DotTonVinhModule } from './pages/dot-ton-vinh/dot-ton-vinh.module';
 import { DashboardRoutingModule } from './dashboard/dashboard-routing.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -10,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
-
+import {ButtonModule} from 'primeng/button';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,8 +25,11 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
     BrowserAnimationsModule,
     NzLayoutModule,
     NzMenuModule,
+    DotTonVinhRoutingModule,
     DashboardRoutingModule,
     NzBreadCrumbModule,
+    ButtonModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
