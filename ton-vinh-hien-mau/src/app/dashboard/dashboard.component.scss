@@ -1,0 +1,52 @@
+.layout {
+  min-height: 100vh;
+}
+
+.banner-wrapper{
+  width: 100%;
+  max-width: 1600px;
+  text-align: center;
+}
+.image {
+  width: 100%;
+  object-fit: cover;
+}
+nz-header {
+  position: fixed;
+  width: 100%;
+  height: auto;
+  background-color: white;
+}
+
+[nz-menu] {
+  line-height: inherit;
+}
+
+nz-content {
+  padding: 0 50px;
+  margin-top: 64px;
+}
+
+nz-breadcrumb {
+  margin: 16px 0;
+}
+
+.inner-content {
+  background: #fff;
+  padding: 24px;
+  min-height: 380px;
+}
+
+nz-footer {
+  text-align: center;
+}
+
+[nz-menu] {
+  width: auto;
+  font-weight: 500;
+}
+
+[nzTitle]{
+  font-weight: 500;
+  color: black;
+}
