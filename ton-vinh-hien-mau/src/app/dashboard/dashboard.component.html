@@ -2,76 +2,55 @@
   <nz-header>
     <div class="banner-wrapper"><img _ngcontent-apu-c70 class="image" src="../../../assets/images/banner.png" alt=""></div>
     <ul nz-menu [nzMode]="'horizontal'">
-      <li nz-submenu nzTitle="Quản lý tôn vinh">
+      <li nz-submenu nzTitle="Quản lý tôn vinh" nzIcon="contacts" >
         <ul>
-          <li nz-menu-group class="textLi">
-            <a routerLink="dottonvinh" routerLinkActive="active">
+          <li nz-menu-item class="textLi">
+            <a routerLink="Tao-dot-ton-vinh" routerLinkActive="active">
               <span>Đợt tôn vinh</span>
             </a>
           </li>
-          <li nz-menu-group >
-            <a routerLink="dottonvinh" routerLinkActive="active">
-              <i nz-icon nzType="book" ></i>
+          <li nz-menu-item >
+            <a routerLink="De-xuat-ca-nhan" routerLinkActive="active">
               <span>Đề xuất cá nhân</span>
             </a>
           </li>
-          <li nz-menu-group>
-            <a routerLink="dottonvinh" routerLinkActive="active">
-              <i nz-icon nzType="book" ></i>
+          <li nz-menu-item>
+            <a routerLink="De-xuat-ho-gia-dinh" routerLinkActive="active">
               <span>Đề xuất hộ gia đình</span>
             </a>
           </li>
         </ul>
       </li>
-      <li nz-submenu nzTitle="Quản lý người hiến máu" nzIcon="mail">
+
+      <li nz-submenu nzTitle="Quản người hiến máu" nzIcon="heart" >
         <ul>
-          <li nz-menu-group nzTitle="Thêm người hiến máu"></li>
-          <li nz-menu-group nzTitle="Danh sách người hiến máu"></li>
-          <li nz-menu-group nzTitle="Nhập dữ liệu người hiến máu"></li>
+          <li nz-menu-group class="textLi">
+            <a routerLink="" routerLinkActive="active">
+              <span>Tạo mới</span>
+            </a>
+          </li>
+          <li nz-menu-group >
+            <a routerLink="" routerLinkActive="active">
+              <i nz-icon nzType="book" ></i>
+              <span>Danh sách hiến máu</span>
+            </a>
+          </li>
+          <li nz-menu-group>
+            <a routerLink="" routerLinkActive="active">
+              <i nz-icon nzType="book" ></i>
+              <span>Nhập dữ liệu</span>
+            </a>
+          </li>
         </ul>
       </li>
-      <li nz-submenu nzTitle="Đơn vị hiến máu" nzIcon="mail"></li>
-      <li nz-submenu nzTitle="Lịch sử tôn vinh" nzIcon="mail"></li>
-      <li nz-submenu nzTitle="Đăng xuất" nzIcon="mail"></li>
+      <li nz-submenu nzTitle="Đơn vị hiến máu"></li>
+      <li nz-submenu nzTitle="Lịch sử tôn vinh"></li>
+      <li nz-submenu nzTitle="Đăng xuất"></li>
     </ul>
   </nz-header>
 
   <nz-content>
-    <div class="row">
-      <div class="col-sm">
-        <h3>Tạo Đợt tôn vinh</h3>
-        <div class="inner-content">
-          <router-outlet></router-outlet>
-        </div>
-      </div>
-      <div class="col-sm-8">
-        <h3>Danh sách Đợt tôn vinh</h3>
-        <div class="inner-content">
-          <nz-table #basicTable>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Tên đợt tôn vinh</th>
-                <th>Mã đợt tôn vinh</th>
-                <th>Thao tác</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let data of basicTable.data">
-                <td>{{data.id}}</td>
-                <td>{{data.name}}</td>
-                <td>{{data.code}}</td>
-                <td>
-                  <a>Action 一 {{data.name}}</a>
-                  <nz-divider nzType="vertical"></nz-divider>
-                  <a>Delete</a>
-                </td>
-              </tr>
-            </tbody>
-          </nz-table>
-        </div>
-      </div>
-    </div>
+    <router-outlet></router-outlet>
   </nz-content>
   <nz-footer>Copyright@2021 - Hội chữ thập đỏ Tỉnh Bình Định</nz-footer>
 </nz-layout>

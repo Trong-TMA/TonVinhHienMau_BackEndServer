@@ -1,0 +1,40 @@
+<nz-steps>
+  <nz-step nzTitle="Login" nzStatus="finish" nzIcon="import"></nz-step>
+  <nz-step nzTitle="Verification" nzStatus="finish" nzIcon="deployment-unit"></nz-step>
+  <nz-step nzTitle="Pay" nzStatus="process" nzIcon="loading"></nz-step>
+  <nz-step nzTitle="Done" nzStatus="wait" [nzIcon]="iconTemplate"></nz-step>
+  <ng-template #iconTemplate><i nz-icon nzType="smile"></i></ng-template>
+</nz-steps>
+<div class="steps-content">
+  <form nz-form >
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Đợt tôn vinh</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback>
+        <nz-select name="select-validate">
+          <nz-option nzValue="Option 1" nzLabel="Option 1"></nz-option>
+          <nz-option nzValue="Option 2" nzLabel="Option 2"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Đơn vị tôn vinh</nz-form-label>
+      <nz-form-control [nzSpan]="12" nzHasFeedback>
+        <nz-select name="select-validate">
+          <nz-option nzValue="Option 1" nzLabel="Option 1"></nz-option>
+          <nz-option nzValue="Option 2" nzLabel="Option 2"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>File dữ liệu</nz-form-label>
+      <nz-form-control nzHasFeedback [nzSpan]="12">
+        <nz-input-group class="ng-tns-c83-15 ant-input-group">
+          <input type="file" nz-input="" formcontrolname="file" placeholder="File dữ liệu" class="ant-input ng-pristine ng-invalid ng-star-inserted ng-touched">
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="submit-btn ant-form-item ant-row">
+      <button nz-button nzType="primary">Tiếp tục</button>
+    </nz-form-item>
+  </form>
+</div>

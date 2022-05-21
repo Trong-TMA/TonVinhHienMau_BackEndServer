@@ -1,5 +1,4 @@
-import { DotTonVinhRoutingModule } from './../pages/dot-ton-vinh/dot-ton-vinh-routing.module';
-import { DotTonVinhModule } from './../pages/dot-ton-vinh/dot-ton-vinh.module';
+
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -13,6 +12,9 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import {ButtonModule} from 'primeng/button';
+import { NzFormModule } from 'ng-zorro-antd/form';
+
+
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import {ButtonModule} from 'primeng/button';
     NzTableModule,
     NzDividerModule,
     NzInputModule,
-    ButtonModule
+    ButtonModule,
+    NzFormModule,
 
   ],
   exports:[

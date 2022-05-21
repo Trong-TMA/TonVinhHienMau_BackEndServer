@@ -51,7 +51,7 @@ nz-breadcrumb {
 .inner-content {
   background: #fff;
   padding: 24px;
-  min-height: 380px;
+  min-height: auto;
 }
 
 nz-footer {
@@ -62,5 +62,9 @@ nz-footer {
   width: auto;
   font-weight: 500;
   color: #01645a
+}
+
+[nzIcon] {
+  size: 50px;
 }
 

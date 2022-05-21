@@ -1,4 +1,46 @@
-<div class="container">
-  <input type="text" placeholder="Large"  pInputText />
-  <p-button label="Submit"></p-button>
+<div class="row">
+  <div class="col-sm">
+    <h3>Tạo Đợt tôn vinh</h3>
+    <div class="inner-content">
+      <form nz-form>
+        <nz-form-item>
+          <nz-form-control >
+            <input nz-input type="email" id="email" placeholder="Mã đợt tôn vinh">
+          </nz-form-control>
+        </nz-form-item >
+        <nz-form-item>
+          <nz-form-control [nzSpan]="14">
+            <button nz-button nzType="primary">Thêm</button>
+          </nz-form-control>
+        </nz-form-item >
+      </form>
+    </div>
+  </div>
+  <div class="col-sm-8">
+    <h3>Danh sách Đợt tôn vinh</h3>
+    <div class="inner-content">
+      <nz-table #basicTable>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Tên đợt tôn vinh</th>
+            <th>Mã đợt tôn vinh</th>
+            <th>Thao tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of basicTable.data">
+            <td>{{data.id}}</td>
+            <td>{{data.name}}</td>
+            <td>{{data.code}}</td>
+            <td>
+              <a>Action 一 {{data.name}}</a>
+              <nz-divider nzType="vertical"></nz-divider>
+              <a>Delete</a>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
 </div>

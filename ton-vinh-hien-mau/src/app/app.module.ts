@@ -1,3 +1,4 @@
+import { DeXuatCaNhanModule } from './pages/de-xuat-ca-nhan/de-xuat-ca-nhan.module';
 import { DotTonVinhRoutingModule } from './pages/dot-ton-vinh/dot-ton-vinh-routing.module';
 import { DotTonVinhModule } from './pages/dot-ton-vinh/dot-ton-vinh.module';
 import { DashboardRoutingModule } from './dashboard/dashboard-routing.module';
@@ -13,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import {ButtonModule} from 'primeng/button';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,8 +30,7 @@ import {ButtonModule} from 'primeng/button';
     DotTonVinhRoutingModule,
     DashboardRoutingModule,
     NzBreadCrumbModule,
-    ButtonModule
-
+    ButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
