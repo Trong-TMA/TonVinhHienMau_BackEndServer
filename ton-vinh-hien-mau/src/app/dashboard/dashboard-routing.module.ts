@@ -1,10 +1,8 @@
+import { DonViComponent } from './../pages/don-vi/don-vi.component';
 import { DeXuatHoGiaDinhComponent } from './../pages/de-xuat-ho-gia-dinh/de-xuat-ho-gia-dinh.component';
-
-
 import { DashboardComponent } from './dashboard.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { DotTonVinhComponent } from '../pages/dot-ton-vinh/dot-ton-vinh.component';
 import { DeXuatCaNhanComponent } from '../pages/de-xuat-ca-nhan/de-xuat-ca-nhan.component';
 
@@ -22,6 +20,10 @@ const routes: Routes = [
     {
       path: 'De-xuat-ho-gia-dinh',
       component: DeXuatHoGiaDinhComponent,
+    },
+    {
+      path: 'Don-vi',
+      component: DonViComponent,
     }
   ] },
 ];

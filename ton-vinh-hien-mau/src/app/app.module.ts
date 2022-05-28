@@ -1,3 +1,6 @@
+import { DonViModule } from './pages/don-vi/don-vi.module';
+import { DonViComponent } from './pages/don-vi/don-vi.component';
+import { DonViRoutingModule } from './pages/don-vi/don-vi-routing.module';
 import { DeXuatCaNhanModule } from './pages/de-xuat-ca-nhan/de-xuat-ca-nhan.module';
 import { DotTonVinhRoutingModule } from './pages/dot-ton-vinh/dot-ton-vinh-routing.module';
 import { DotTonVinhModule } from './pages/dot-ton-vinh/dot-ton-vinh.module';
@@ -20,9 +23,10 @@ import vi from '@angular/common/locales/vi';
 
 registerLocaleData(vi);
 import { NZ_DATE_LOCALE, NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
+
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -33,9 +37,11 @@ import { NZ_DATE_LOCALE, NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
     NzLayoutModule,
     NzMenuModule,
     DotTonVinhRoutingModule,
+    DonViRoutingModule,
     DashboardRoutingModule,
     NzBreadCrumbModule,
     ButtonModule,
+    DonViModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: vi_VN },

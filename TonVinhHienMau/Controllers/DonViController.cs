@@ -24,12 +24,13 @@ namespace TonVinhHienMau.Controllers
         [HttpGet("")]
         public IActionResult GetAll()
         {
-            return new JsonResult(_context.DonVi);
+            return new JsonResult(_context.DonVi.Where(u=>u.IsDeleted!= true));
         }
 
         [HttpPost("create")]
         public IActionResult Create(DonVi donVi)
         {
+
             DonVi dv = new DonVi()
             {
                 Id = Guid.NewGuid(),
