@@ -39,6 +39,12 @@ namespace TonVinhHienMau
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TonVinhHienMau", Version = "v1" });
             });
             services.AddTransient<ITonVinhHienMau, TonVinhHienMauimpl>();
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder => {
+                builder.WithOrigins("http://localhost:4200")
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+
+            }));
 
         }
 
@@ -51,7 +57,7 @@ namespace TonVinhHienMau
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TonVinhHienMau v1"));
             }
-
+            app.UseCors("MyPolicy");
             app.UseHttpsRedirection();
 
             app.UseRouting();

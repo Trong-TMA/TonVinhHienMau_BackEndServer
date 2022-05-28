@@ -1,3 +1,4 @@
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
@@ -32,7 +33,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
     NzInputModule,
     ButtonModule,
     NzFormModule,
-
+    NzModalModule
   ],
   exports:[
     DashboardComponent,

@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using TonVinhHienMau.Data;
 using TonVinhHienMau.Models;
+using TonVinhHienMau.Models.ViewModels;
 
 namespace TonVinhHienMau.Controllers
 {
@@ -24,29 +25,41 @@ namespace TonVinhHienMau.Controllers
         [HttpGet("")]
         public IActionResult GetAll()
         {
-            return new JsonResult(_context.DotTonVinh);
+            return new JsonResult(_context.DotTonVinh.Where(u=>u.IsDeleted!= true));
         }
 
         [HttpPost("create")]
-        public IActionResult Create(DotTonVinh dotTonVinh)
+        public IActionResult Create(string madottonvinh)
         {
-            DotTonVinh dottv = new DotTonVinh()
+            if (!string.IsNullOrEmpty(madottonvinh))
             {
-                Id = Guid.NewGuid(),
-                TenDotTonVinh = dotTonVinh.TenDotTonVinh,
-                MaDotTonVinh = dotTonVinh.MaDotTonVinh,
-                IsDeleted = false
-            };
-            _context.DotTonVinh.Add(dottv);
-            _context.SaveChanges();
+                DotTonVinh dottv = new DotTonVinh()
+                {
+                    Id = Guid.NewGuid(),
+                    TenDotTonVinh = "Năm " + madottonvinh,
+                    MaDotTonVinh = madottonvinh,
+                    IsDeleted = false
+                };
+                _context.DotTonVinh.Add(dottv);
+                _context.SaveChanges();
+            }
             return new JsonResult("Success");
         }
 
         [HttpPost("edit")]
-        public IActionResult Edit(Guid DotTonVinhId, string name,string madottonvinh)
+        public IActionResult Edit(DottonvinhVM dottonvinhVM)
         {
-            var dv = _context.DotTonVinh.FirstOrDefault(u => u.Id.Equals(DotTonVinhId));
-            _context.DotTonVinh.Update(dv);
+            var dv = _context.DotTonVinh.FirstOrDefault(u => u.Id.Equals(dottonvinhVM.Id));
+            if (!string.IsNullOrEmpty(dottonvinhVM.Name))
+            {
+                dv.TenDotTonVinh = dottonvinhVM.Name;
+                _context.DotTonVinh.Update(dv);
+            }
+            if (!string.IsNullOrEmpty(dottonvinhVM.Code))
+            {
+                dv.MaDotTonVinh = dottonvinhVM.Code;
+                _context.DotTonVinh.Update(dv);
+            }
             _context.SaveChanges();
             return new JsonResult("Success");
         }

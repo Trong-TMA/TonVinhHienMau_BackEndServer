@@ -14,7 +14,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import {ButtonModule} from 'primeng/button';
+import { registerLocaleData } from '@angular/common';
+import vi from '@angular/common/locales/vi';
 
+
+registerLocaleData(vi);
+import { NZ_DATE_LOCALE, NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +37,10 @@ import {ButtonModule} from 'primeng/button';
     NzBreadCrumbModule,
     ButtonModule,
   ],
-  providers: [],
+  providers: [
+    { provide: NZ_I18N, useValue: vi_VN },
+    { provide: NZ_DATE_LOCALE, useValue: vi},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
