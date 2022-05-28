@@ -10,23 +10,29 @@ import { DottonvinhService } from 'src/app/shared/services/dottonvinh.service';
 })
 export class DotTonVinhEditComponent implements OnInit {
 
+  isSpinning: boolean;
   validateForm!: FormGroup;
   @Input() dottonvinh :any;
-  @Output() LoadDataEvent: EventEmitter<any>;
+  @Output() loadDataEmit: EventEmitter<any>;
 
   constructor(
     private fb: FormBuilder,
     private dottonvinhService: DottonvinhService) {
-      this.LoadDataEvent = new EventEmitter();
+      this.loadDataEmit = new EventEmitter();
+      this.isSpinning = false;
   }
 
   submitForm(){
     this.dottonvinh.name = this.validateForm.get('tendottonvinh')?.value
     this.dottonvinh.code = this.validateForm.get('madottonvinh')?.value
-
-    return this.dottonvinhService.editDottonvinh(this.dottonvinh).subscribe((item)=>{
-      this.LoadDataEvent.emit();
+    this.isSpinning = true;
+    this.dottonvinhService.editDottonvinh(this.dottonvinh).subscribe((item)=>{
+      this.loadDataEmit.emit();
     })
+  }
+
+  loadDonvi(){
+    this.loadDataEmit.emit();
   }
 
   ngOnInit(){

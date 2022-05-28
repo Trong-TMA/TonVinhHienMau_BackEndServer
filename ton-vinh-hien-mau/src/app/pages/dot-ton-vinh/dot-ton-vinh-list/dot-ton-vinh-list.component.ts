@@ -26,7 +26,7 @@ export class DotTonVinhListComponent implements OnInit {
   }
 
   loadDottonvinh(){
-    this.loadDataEmit.emit()
+    this.loadDataEmit.emit();
   }
 
   deleteDTV(item: any){
