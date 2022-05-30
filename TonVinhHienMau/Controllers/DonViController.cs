@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using TonVinhHienMau.Data;
 using TonVinhHienMau.Models;
+using TonVinhHienMau.Models.ViewModels;
 
 namespace TonVinhHienMau.Controllers
 {
@@ -24,30 +25,44 @@ namespace TonVinhHienMau.Controllers
         [HttpGet("")]
         public IActionResult GetAll()
         {
-            return new JsonResult(_context.DonVi.Where(u=>u.IsDeleted!= true));
+            return new JsonResult(_context.DonVi.Where(u=>u.IsDeleted!= true).OrderBy(u => u.TenDonVi));
         }
 
         [HttpPost("create")]
-        public IActionResult Create(DonVi donVi)
+        public IActionResult Create(DonViVM donViVM)
         {
-
-            DonVi dv = new DonVi()
+            if (!string.IsNullOrEmpty(donViVM.TenDonVi) && !string.IsNullOrEmpty(donViVM.MaDonVi))
             {
-                Id = Guid.NewGuid(),
-                TenDonVi = donVi.TenDonVi,
-                MaDonVi = donVi.MaDonVi,
-                Diachi = donVi.Diachi,
-                IsDeleted = false
-            };
-            _context.DonVi.Add(dv);
-            _context.SaveChanges();
+                DonVi dv = new DonVi()
+                {
+                    Id = Guid.NewGuid(),
+                    TenDonVi = donViVM.TenDonVi,
+                    MaDonVi = donViVM.MaDonVi,
+                    Diachi = donViVM.Diachi,
+                    IsDeleted = false
+                };
+                _context.DonVi.Add(dv);
+                _context.SaveChanges();
+            }
             return new JsonResult("Success");
         }
 
         [HttpPost("edit")]
-        public IActionResult Edit(Guid DonViId,string name, string diachi, string madonvi)
+        public IActionResult Edit(DonViVM donViVM)
         {
-            var dv = _context.DonVi.FirstOrDefault(u => u.Id.Equals(DonViId));
+            var dv = _context.DonVi.FirstOrDefault(u => u.Id.Equals(donViVM.Id));
+            if (!string.IsNullOrEmpty(donViVM.TenDonVi))
+            {
+                dv.TenDonVi = donViVM.TenDonVi;
+            }
+            if (!string.IsNullOrEmpty(donViVM.MaDonVi))
+            {
+                dv.MaDonVi = donViVM.MaDonVi;
+            }
+            if (!string.IsNullOrEmpty(donViVM.Diachi))
+            {
+                dv.Diachi = donViVM.Diachi;
+            }
             _context.DonVi.Update(dv);
             _context.SaveChanges();
             return new JsonResult("Success");
@@ -57,9 +72,12 @@ namespace TonVinhHienMau.Controllers
         public IActionResult Delete(Guid DonViId)
         {
             var dv = _context.DonVi.FirstOrDefault(u => u.Id.Equals(DonViId));
-            dv.IsDeleted = true;
-            _context.DonVi.Update(dv);
-            _context.SaveChanges();
+            if(dv != null)
+            {
+                dv.IsDeleted = true;
+                _context.DonVi.Update(dv);
+                _context.SaveChanges();
+            }
             return new JsonResult("Success");
         }
 

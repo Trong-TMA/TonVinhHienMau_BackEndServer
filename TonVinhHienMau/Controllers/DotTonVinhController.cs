@@ -25,7 +25,7 @@ namespace TonVinhHienMau.Controllers
         [HttpGet("")]
         public IActionResult GetAll()
         {
-            return new JsonResult(_context.DotTonVinh.Where(u=>u.IsDeleted!= true));
+            return new JsonResult(_context.DotTonVinh.Where(u=>u.IsDeleted!= true).OrderBy(u=>u.MaDotTonVinh));
         }
 
         [HttpPost("create")]
@@ -68,9 +68,12 @@ namespace TonVinhHienMau.Controllers
         public IActionResult Delete(Guid DotTonVinhId)
         {
             var dv = _context.DotTonVinh.FirstOrDefault(u => u.Id.Equals(DotTonVinhId));
-            dv.IsDeleted = true;
-            _context.DotTonVinh.Update(dv);
-            _context.SaveChanges();
+            if (dv != null)
+            {
+                dv.IsDeleted = true;
+                _context.DotTonVinh.Update(dv);
+                _context.SaveChanges();
+            }
             return new JsonResult("Success");
         }
     }
