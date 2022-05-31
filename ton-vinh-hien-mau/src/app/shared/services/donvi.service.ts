@@ -1,3 +1,4 @@
+import { DonVi } from 'src/app/shared/models/donvi.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -19,4 +20,13 @@ export class DonviService {
     return this.http.get(`${environment.apiUrl}/api/DonVi`, {headers: this._sharedHeaders});
   }
 
+  createDonvi(donvi:any){
+    return this.http.post(`${environment.apiUrl}/api/DonVi/create`,donvi,{headers: this._sharedHeaders,});
+  }
+  editDonvi(donvi:any){
+    return this.http.post(`${environment.apiUrl}/api/DonVi/edit`,donvi,{headers: this._sharedHeaders,});
+  }
+  deleteDonvi(iddonvi:any){
+    return this.http.put(`${environment.apiUrl}/api/DonVi/delete?DonViId=${iddonvi}`,{headers: this._sharedHeaders,});
+  }
 }

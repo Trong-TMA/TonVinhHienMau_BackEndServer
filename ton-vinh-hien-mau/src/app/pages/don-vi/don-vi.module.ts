@@ -17,6 +17,8 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { DonViRoutingModule } from './don-vi-routing.module';
+import { DonViEditComponent } from './don-vi-edit/don-vi-edit.component';
 
 
 @NgModule({
@@ -25,9 +27,11 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     DonViItemComponent,
     DonViListComponent,
     DonViCreateComponent,
+    DonViEditComponent,
   ],
   imports: [
     CommonModule,
+    DonViRoutingModule,
     InputTextModule,
     NzFormModule,
     NzInputModule,

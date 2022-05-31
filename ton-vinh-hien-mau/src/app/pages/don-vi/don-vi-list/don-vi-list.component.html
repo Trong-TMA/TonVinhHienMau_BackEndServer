@@ -16,12 +16,12 @@
       <td class="col-sm-2">{{item.diachi}}</td>
       <td class="col-sm-2">
         <button pButton pRipple icon="pi pi-bookmark" (click)="showModal(item)"></button>
-        <button pButton pRipple icon="pi pi-trash" (click)="deleteDTV(item)"></button>
+        <button pButton pRipple icon="pi pi-trash" (click)="deleteDV(item)"></button>
       </td>
     </tr>
   </tbody>
 </nz-table>
 <p-dialog header="Header" [(visible)]="isVisible" [modal]="true" [style]="{width: '50vw'}"
     [draggable]="false" [resizable]="false">
-    <!-- <app-dot-ton-vinh-edit (loadDataEmit)="loadDottonvinh()" [dottonvinh]="dtv"></app-dot-ton-vinh-edit> -->
-</p-dialog>
+    <app-don-vi-edit (loadDataEmit)="loadDottonvinh()" [donvi]="dv" ></app-don-vi-edit>
+  </p-dialog>

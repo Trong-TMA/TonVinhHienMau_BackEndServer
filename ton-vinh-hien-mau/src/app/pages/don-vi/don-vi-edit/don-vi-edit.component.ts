@@ -1,33 +1,34 @@
-import { DonVi } from 'src/app/shared/models/donvi.model';
-
 import { DonviService } from './../../../shared/services/donvi.service';
-import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
+import { DonVi } from './../../../shared/models/donvi.model';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-don-vi-create',
-  templateUrl: './don-vi-create.component.html',
-  styleUrls: ['./don-vi-create.component.scss'],
+  selector: 'app-don-vi-edit',
+  templateUrl: './don-vi-edit.component.html',
+  styleUrls: ['./don-vi-edit.component.scss'],
   providers: [FormBuilder]
 })
-export class DonViCreateComponent implements OnInit {
+export class DonViEditComponent implements OnInit {
 
-  isVisible = false;
+  isSpinning: boolean;
   validateForm!: FormGroup;
   @Input() donvi: DonVi = new DonVi();
   @Output() loadDataEmit: EventEmitter<any>;
+
 
   constructor(
     private fb: FormBuilder,
     private donviService: DonviService) {
       this.loadDataEmit = new EventEmitter();
+      this.isSpinning = false;
   }
 
   submitForm(){
     this.donvi.tenDonVi = this.validateForm.get("tendonvi")?.value;
     this.donvi.maDonVi = this.validateForm.get("madonvi")?.value;
     this.donvi.diachi = this.validateForm.get("diachi")?.value;
-    return this.donviService.createDonvi(this.donvi).subscribe((item)=>{
+    return this.donviService.editDonvi(this.donvi).subscribe((item)=>{
       this.loadDataEmit.emit();
     });
   }
@@ -38,8 +39,8 @@ export class DonViCreateComponent implements OnInit {
 
   ngOnInit(){
     this.validateForm = this.fb.group({
-      tendonvi: [null, [Validators.required]],
-      madonvi: [null, [Validators.required]],
+      tendonvi: [null],
+      madonvi: [null],
       diachi: [null],
     });
   }

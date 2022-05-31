@@ -54,16 +54,18 @@ namespace TonVinhHienMau.Controllers
             if (!string.IsNullOrEmpty(donViVM.TenDonVi))
             {
                 dv.TenDonVi = donViVM.TenDonVi;
+                _context.DonVi.Update(dv);
             }
             if (!string.IsNullOrEmpty(donViVM.MaDonVi))
             {
                 dv.MaDonVi = donViVM.MaDonVi;
+                _context.DonVi.Update(dv);
             }
             if (!string.IsNullOrEmpty(donViVM.Diachi))
             {
                 dv.Diachi = donViVM.Diachi;
+                _context.DonVi.Update(dv);
             }
-            _context.DonVi.Update(dv);
             _context.SaveChanges();
             return new JsonResult("Success");
         }

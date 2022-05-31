@@ -1,17 +1,17 @@
 <form nz-form [formGroup]="validateForm">
   <nz-form-item>
     <nz-form-label [nzSm]="4" >Tên đơn vị</nz-form-label>
-    <nz-form-control nzErrorTip="Nhập tên đơn vị!">
+    <nz-form-control>
       <nz-input-group>
-        <input formControlName="tendonvi" nz-input placeholder="Tên đon vị"/>
+        <input formControlName="tendonvi" nz-input [placeholder]="donvi.tenDonVi"/>
       </nz-input-group>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
     <nz-form-label [nzSm]="4" >Mã đơn vị</nz-form-label>
-    <nz-form-control nzErrorTip="Nhập mã đơn vị!">
+    <nz-form-control>
       <nz-input-group>
-        <input formControlName="madonvi" nz-input placeholder="Mã đon vị"/>
+        <input formControlName="madonvi" nz-input [placeholder]="donvi.maDonVi"/>
       </nz-input-group>
     </nz-form-control>
   </nz-form-item>
@@ -19,14 +19,13 @@
     <nz-form-label [nzSm]="4" >Địa chỉ</nz-form-label>
     <nz-form-control>
       <nz-input-group>
-        <input formControlName="diachi" nz-input placeholder="Địa chỉ"/>
+        <input formControlName="diachi" nz-input [placeholder]="donvi.diachi">
       </nz-input-group>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
     <nz-form-control>
-      <button nz-button nzType="primary" [disabled]="!validateForm.valid" (click)="submitForm()" (loadDataEmit)="loadDonvi()">Thêm
-      </button>
+      <button nz-button nzType="primary" (click)="submitForm()" (loadDataEmit)="loadDonvi()">Xác nhận</button>
     </nz-form-control>
   </nz-form-item>
 </form>
