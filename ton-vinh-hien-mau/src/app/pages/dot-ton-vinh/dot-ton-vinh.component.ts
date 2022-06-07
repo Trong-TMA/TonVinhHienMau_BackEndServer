@@ -29,8 +29,6 @@ export class DotTonVinhComponent implements OnInit {
   loadDottonvinh(){
     this.isSpinning = true;
     this.getDottonvinh().subscribe((item)=>{
-      console.log(item);
-
       this.messageService.add({severity:'success', summary:'Cập nhật thành công!', detail:'Cập nhật dữ liệu từ server thành công!'});
       setTimeout(()=>{
         this.dottonvinhlist = item;

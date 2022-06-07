@@ -10,8 +10,8 @@ using TonVinhHienMau.Data;
 namespace TonVinhHienMau.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220514044748_Dbnew")]
-    partial class Dbnew
+    [Migration("20220531151543_newDb")]
+    partial class newDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

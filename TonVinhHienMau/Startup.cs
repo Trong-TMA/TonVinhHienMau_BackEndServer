@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
@@ -45,6 +45,10 @@ namespace TonVinhHienMau
                 .AllowAnyHeader();
 
             }));
+
+            // Cấu hình các thông tin Interface & Implement
+            services.AddTransient<IHienMau, HienMau>();
+            services.AddTransient<ITonVinhHienMau, TonVinhHienMauimpl>();
 
         }
 

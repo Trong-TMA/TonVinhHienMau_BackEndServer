@@ -1,9 +1,11 @@
+import { DotTonVinhModule } from './pages/dot-ton-vinh/dot-ton-vinh.module';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/dashboard'},
-  { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)}
+  { path: '', pathMatch: 'full', redirectTo: '/dashboard/De-xuat-ca-nhan'},
+  { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)},
+  { path: 'dashboard/De-xuat-ca-nhan', loadChildren: () => import('./pages/de-xuat-ca-nhan/de-xuat-ca-nhan.module').then(m => m.DeXuatCaNhanModule)},
 ];
 
 @NgModule({

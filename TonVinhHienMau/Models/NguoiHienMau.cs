@@ -13,6 +13,10 @@ namespace TonVinhHienMau.Models
         [Column(TypeName = "nvarchar(500)")]
         public string HoTen { get; set; }
 
+        [MaxLength(500)]
+        [Column(TypeName = "nvarchar(500)")]
+        public string MaNguoiHien { get; set; }
+
         public bool? GioiTinh { get; set; }
 
         [MaxLength(50)]
@@ -26,6 +30,10 @@ namespace TonVinhHienMau.Models
         [MaxLength(500)]
         [Column(TypeName = "nvarchar(500)")]
         public string DiaChi { get; set; }
+
+        [MaxLength(500)]
+        [Column(TypeName = "nvarchar(500)")]
+        public string NhomMau { get; set; }
 
         public string TV_5 { get; set; }
         public string TV_10 { get; set; }
@@ -47,12 +55,12 @@ namespace TonVinhHienMau.Models
  
         public string TV_100 { get; set; }
 
-        public Guid? DonViId { get; set; }
+        public Guid DonViId { get; set; }
 
         [ForeignKey("DonViId")]
         public virtual DonVi DonVis { get; set; }
 
-        public Guid? DotTonVinhId { get; set; }
+        public Guid DotTonVinhId { get; set; }
 
         [ForeignKey("DotTonVinhId")]
         public virtual DotTonVinh DotTonVinhs { get; set; }

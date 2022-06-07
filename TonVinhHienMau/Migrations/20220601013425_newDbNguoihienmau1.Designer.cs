@@ -10,8 +10,8 @@ using TonVinhHienMau.Data;
 namespace TonVinhHienMau.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220514034342_Db")]
-    partial class Db
+    [Migration("20220601013425_newDbNguoihienmau1")]
+    partial class newDbNguoihienmau1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -85,10 +85,14 @@ namespace TonVinhHienMau.Migrations
                     b.Property<Guid?>("DotTonVinhId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("GioiTinh")
+                    b.Property<bool?>("GioiTinh")
                         .HasColumnType("bit");
 
                     b.Property<string>("HoTen")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("MaNguoiHien")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -98,6 +102,10 @@ namespace TonVinhHienMau.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("NgheNghiep")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("NhomMau")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 

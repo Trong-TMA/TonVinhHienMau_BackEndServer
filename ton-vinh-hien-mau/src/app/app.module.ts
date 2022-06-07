@@ -1,3 +1,4 @@
+import { DanhSachHienMauModule } from './pages/danh-sach-hien-mau/danh-sach-hien-mau.module';
 import { DonViModule } from './pages/don-vi/don-vi.module';
 import { DonViComponent } from './pages/don-vi/don-vi.component';
 import { DonViRoutingModule } from './pages/don-vi/don-vi-routing.module';
@@ -26,7 +27,7 @@ import { NZ_DATE_LOCALE, NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +43,7 @@ import { NZ_DATE_LOCALE, NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
     NzBreadCrumbModule,
     ButtonModule,
     DonViModule,
+    DanhSachHienMauModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: vi_VN },

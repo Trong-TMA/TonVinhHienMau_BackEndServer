@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TonVinhHienMau.Migrations
 {
-    public partial class Db : Migration
+    public partial class newDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,7 +42,7 @@ namespace TonVinhHienMau.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     HoTen = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
-                    GioiTinh = table.Column<bool>(type: "bit", nullable: false),
+                    GioiTinh = table.Column<bool>(type: "bit", nullable: true),
                     NamSinh = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     NgheNghiep = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     DiaChi = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),

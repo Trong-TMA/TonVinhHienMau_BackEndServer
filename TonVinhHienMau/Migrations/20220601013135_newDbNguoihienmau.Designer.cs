@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TonVinhHienMau.Data;
 
 namespace TonVinhHienMau.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220601013135_newDbNguoihienmau")]
+    partial class newDbNguoihienmau
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,10 +89,6 @@ namespace TonVinhHienMau.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("HoTen")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("MaNguoiHien")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 

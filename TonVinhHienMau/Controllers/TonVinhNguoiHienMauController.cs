@@ -30,12 +30,6 @@ namespace TonVinhHienMau.Controllers
             _tonVinhHienMau = tonVinhHienMau;
         }
 
-        [HttpGet("getAll")]
-        public IActionResult GetAll()
-        {
-            return new JsonResult(_context.NguoiHienMau);
-        }
-
         [HttpPost("Import")]
         public IActionResult Import(Guid? DonviId, Guid? DotTonVinhId, IFormFile file)
         {

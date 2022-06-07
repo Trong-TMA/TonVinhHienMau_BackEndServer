@@ -1,0 +1,19 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="search()" class="form">
+  <nz-form-item>
+    <nz-form-label>Tìm kiếm</nz-form-label>
+    <nz-form-control [nzSm]="6">
+      <input nz-input formControlName="filter"/>
+    </nz-form-control>
+    <nz-form-label [nzSm]="2">Giới tính</nz-form-label>
+    <nz-form-control [nzSm]="6">
+      <nz-select formControlName="gioitinh" nzAllowClear>
+        <nz-option [nzValue]="true" nzLabel="Nam"></nz-option>
+        <nz-option [nzValue]="false" nzLabel="Nữ"></nz-option>
+    </nz-select>
+    </nz-form-control>
+    <nz-form-label [nzSm]="2">Năm sinh</nz-form-label>
+    <nz-form-control [nzSm]="6">
+      <nz-date-picker nzMode="year" formControlName="namsinh" nzAllowClear></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+</form>
