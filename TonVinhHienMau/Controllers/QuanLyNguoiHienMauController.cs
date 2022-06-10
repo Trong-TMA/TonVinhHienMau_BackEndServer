@@ -276,21 +276,23 @@ namespace TonVinhHienMau.Controllers
         }
 
         [HttpGet("Search")]
-        public IActionResult Search(string searchString,bool gioitinh,int namsinh)
+        public IActionResult Search(string searchString,bool gioitinh,string namsinh)
         {
             var nguoihienau = _context.NguoiHienMau.ToList();
-            if (string.IsNullOrWhiteSpace(searchString))
+            nguoihienau = nguoihienau.Where(u=>u.GioiTinh.Equals(gioitinh)).ToList();
+            if (searchString != "null")
             {
-                return new JsonResult(nguoihienau);
+                nguoihienau = nguoihienau.Where(u =>
+                    u.HoTen.ToLower().Contains(searchString.ToLower())
+                    || u.NgheNghiep.ToLower().Contains(searchString.ToLower())
+                    || u.DiaChi.ToLower().Contains(searchString.ToLower())
+                    || u.NhomMau.ToLower().Contains(searchString.ToLower())
+                ).ToList();
             }
-            nguoihienau = nguoihienau.Where(u=>u.GioiTinh == gioitinh).ToList();
-            nguoihienau = nguoihienau.Where(u=>u.NamSinh == namsinh).ToList();
-            nguoihienau = nguoihienau.Where(u=>
-               u.HoTen.ToLower().Contains(searchString.ToLower())
-               || u.NgheNghiep.ToLower().Contains(searchString.ToLower())
-               || u.DiaChi.ToLower().Contains(searchString.ToLower())
-               || u.NhomMau.ToLower().Contains(searchString.ToLower())
-            ).ToList();
+            if (namsinh != "Invalid date" && namsinh != DateTime.Now.Year.ToString())
+            {        
+                nguoihienau = nguoihienau.Where(u=>u.NamSinh.Equals(Int32.Parse(namsinh))).ToList();
+            }
             return new JsonResult(nguoihienau);
         }
     }

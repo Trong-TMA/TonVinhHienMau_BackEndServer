@@ -1,4 +1,5 @@
-import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { BsDatepickerConfig, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -47,7 +48,8 @@ import { DanhSachHienMauCreateComponent } from './danh-sach-hien-mau-create/danh
     NzButtonModule,
     NzModalModule,
     FormsModule,
-    NzDatePickerModule
+    BsDatepickerModule
+
   ]
 })
 export class DanhSachHienMauModule { }

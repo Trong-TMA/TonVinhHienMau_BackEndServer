@@ -1,3 +1,4 @@
+import { ImportNguoiHienMauModule } from './pages/import-nguoi-hien-mau/import-nguoi-hien-mau.module';
 import { DanhSachHienMauModule } from './pages/danh-sach-hien-mau/danh-sach-hien-mau.module';
 import { DonViModule } from './pages/don-vi/don-vi.module';
 import { DonViComponent } from './pages/don-vi/don-vi.component';
@@ -24,10 +25,12 @@ import vi from '@angular/common/locales/vi';
 
 registerLocaleData(vi);
 import { NZ_DATE_LOCALE, NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
+import { ImportNguoiHienMauComponent } from './pages/import-nguoi-hien-mau/import-nguoi-hien-mau.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ImportNguoiHienMauComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +47,7 @@ import { NZ_DATE_LOCALE, NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
     ButtonModule,
     DonViModule,
     DanhSachHienMauModule,
+    ImportNguoiHienMauModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: vi_VN },

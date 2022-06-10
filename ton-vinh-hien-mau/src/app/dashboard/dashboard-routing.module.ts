@@ -1,3 +1,4 @@
+import { ImportNguoiHienMauComponent } from './../pages/import-nguoi-hien-mau/import-nguoi-hien-mau.component';
 import { DanhSachHienMauCreateComponent } from './../pages/danh-sach-hien-mau/danh-sach-hien-mau-create/danh-sach-hien-mau-create.component';
 import { DanhSachHienMauComponent } from './../pages/danh-sach-hien-mau/danh-sach-hien-mau.component';
 import { DonViComponent } from './../pages/don-vi/don-vi.component';
@@ -34,6 +35,10 @@ const routes: Routes = [
     {
       path: 'Tao-moi',
       component: DanhSachHienMauCreateComponent,
+    },
+    {
+      path: 'Import-nguoi-hien-mau',
+      component: ImportNguoiHienMauComponent,
     }
   ] },
 ];
