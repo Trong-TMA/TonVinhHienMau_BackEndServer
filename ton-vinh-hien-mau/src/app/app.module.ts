@@ -21,16 +21,12 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import {ButtonModule} from 'primeng/button';
 import { registerLocaleData } from '@angular/common';
 import vi from '@angular/common/locales/vi';
-
-
 registerLocaleData(vi);
 import { NZ_DATE_LOCALE, NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
-import { ImportNguoiHienMauComponent } from './pages/import-nguoi-hien-mau/import-nguoi-hien-mau.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ImportNguoiHienMauComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +43,7 @@ import { ImportNguoiHienMauComponent } from './pages/import-nguoi-hien-mau/impor
     ButtonModule,
     DonViModule,
     DanhSachHienMauModule,
-    ImportNguoiHienMauModule,
+    ImportNguoiHienMauModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: vi_VN },

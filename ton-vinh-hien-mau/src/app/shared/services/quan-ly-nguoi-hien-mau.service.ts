@@ -1,4 +1,4 @@
-import { debounce, debounceTime } from 'rxjs';
+import { catchError, debounce, debounceTime } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -34,5 +34,15 @@ export class QuanLyNguoiHienMauService {
           .get(`${environment.apiUrl}/api/QuanLyNguoiHienMau/Search?searchString=${searchstring}&gioitinh=${gioitinh}&namsinh=${namsinh}`,{headers: this._sharedHeaders,})
           .pipe(debounceTime(1200));
 
+  }
+  import(dottonvinhid: any, donviid: any, file: FormData){
+    return this.http
+    .post(`${environment.apiUrl}/api/QuanLyNguoiHienMau/AddFromExceltoData?DottonvinhId=${dottonvinhid}&DonViId=${donviid}`,file,{
+      responseType: 'json'
+    }).pipe(debounceTime(1000));
+  }
+
+  save(dottonvinhid: any, donviid: any, listnguoihienmau: any){
+    return this.http.post(`${environment.apiUrl}/api/QuanLyNguoiHienMau/SaveChanges?DottonvinhId=${dottonvinhid}&DonViId=${donviid}`,listnguoihienmau,{headers: this._sharedHeaders,});
   }
 }

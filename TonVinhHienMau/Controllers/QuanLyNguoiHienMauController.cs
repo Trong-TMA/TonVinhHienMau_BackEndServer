@@ -50,7 +50,7 @@ namespace TonVinhHienMau.Controllers
         [Consumes("multipart/form-data")]
         public IActionResult importPeople(Guid DottonvinhId, Guid DonViId, IFormFile file)
         {
-            var DonVi = _context.DonVi.Where(u => u.Id.Equals(DonViId) && u.IsDeleted != true).FirstOrDefault();
+            var DonVi =  _context.DonVi.Where(u => u.Id.Equals(DonViId) && u.IsDeleted != true).FirstOrDefault();
             var Dottonvinh = _context.DotTonVinh.Where(u => u.Id.Equals(DottonvinhId) && u.IsDeleted != true).FirstOrDefault();
             List<NguoiHienMauVm> list_result = new List<NguoiHienMauVm>();
 
@@ -87,10 +87,8 @@ namespace TonVinhHienMau.Controllers
 
                         if (hoten != null && namsinh != null && nhomau !=null)
                         {
-                            NguoiHienMau nguoiHienMau = new NguoiHienMau()
+                            NguoiHienMauVm nguoiHienMauVm = new NguoiHienMauVm()
                             {
-                                Id = Guid.NewGuid(),
-                                MaNguoiHien = _hienMau.NonUnicode(hoten) + _hienMau.NonUnicode(namsinh) + _hienMau.NonUnicode(nhomau), 
                                 HoTen = hoten,
                                 GioiTinh = Convert.ToBoolean(gioitinh),
                                 NamSinh = Convert.ToInt32(namsinh),
@@ -109,65 +107,21 @@ namespace TonVinhHienMau.Controllers
                                 TV_80 = tv_80,
                                 TV_90 = tv_90,
                                 TV_100 = tv_100,
-                                DonViId = DonVi.Id,
-                                DotTonVinhId = Dottonvinh.Id
+                                Note = "",
                             };
-
-                            var nguoiHM = _context.NguoiHienMau.FirstOrDefault(s => s.MaNguoiHien.Equals(nguoiHienMau.MaNguoiHien));
+                            var MaNguoiHien = _hienMau.NonUnicode(hoten) + _hienMau.NonUnicode(namsinh) + _hienMau.NonUnicode(nhomau);
+                            var nguoiHM = _context.NguoiHienMau.FirstOrDefault(s => s.MaNguoiHien.Equals(MaNguoiHien) && s.DonViId.Equals(DonViId) && s.DotTonVinhId.Equals(DottonvinhId));
 
                             if (nguoiHM == null)
                             {
-                                _context.NguoiHienMau.Add(nguoiHienMau);
-                                NguoiHienMauVm nguoiHienMauVm = new NguoiHienMauVm()
-                                {
-                                    HoTen = hoten,
-                                    GioiTinh = Convert.ToBoolean(gioitinh),
-                                    NamSinh = Convert.ToInt32(namsinh),
-                                    NgheNghiep = nghenghiep,
-                                    DiaChi = diachi,
-                                    NhomMau = nhomau,
-                                    TV_5 = tv_5,
-                                    TV_10 = tv_10,
-                                    TV_15 = tv_15,
-                                    TV_20 = tv_20,
-                                    TV_30 = tv_30,
-                                    TV_40 = tv_40,
-                                    TV_50 = tv_50,
-                                    TV_60 = tv_60,
-                                    TV_70 = tv_70,
-                                    TV_80 = tv_80,
-                                    TV_90 = tv_90,
-                                    TV_100 = tv_100,
-                                    Note = "Danh sách thêm mới",
-                                };
+                                nguoiHienMauVm.Note = "Danh sách thêm mới";
                                 list_result.Add(nguoiHienMauVm);
                             }
                             else
                             {
-                                _context.NguoiHienMau.Remove(nguoiHM);
-                                _context.NguoiHienMau.Add(nguoiHienMau);
-                                NguoiHienMauVm nguoiHienMauVm = new NguoiHienMauVm()
-                                {
-                                    HoTen = hoten,
-                                    GioiTinh = Convert.ToBoolean(gioitinh),
-                                    NamSinh = Convert.ToInt32(namsinh),
-                                    NgheNghiep = nghenghiep,
-                                    DiaChi = diachi,
-                                    NhomMau = nhomau,
-                                    TV_5 = tv_5,
-                                    TV_10 = tv_10,
-                                    TV_15 = tv_15,
-                                    TV_20 = tv_20,
-                                    TV_30 = tv_30,
-                                    TV_40 = tv_40,
-                                    TV_50 = tv_50,
-                                    TV_60 = tv_60,
-                                    TV_70 = tv_70,
-                                    TV_80 = tv_80,
-                                    TV_90 = tv_90,
-                                    TV_100 = tv_100,
-                                    Note = "Đã cập nhật",
-                                };
+                                if (!nguoiHienMauVm.GioiTinh.Equals(nguoiHM.GioiTinh)) { nguoiHM.GioiTinh = nguoiHienMauVm.GioiTinh; nguoiHienMauVm.Note = nguoiHienMauVm.Note + "Đã cập nhật giới tính"; }
+                                if (!nguoiHienMauVm.NgheNghiep.Equals(nguoiHM.NgheNghiep)) { nguoiHM.NgheNghiep = nguoiHienMauVm.NgheNghiep; nguoiHienMauVm.Note = nguoiHienMauVm.Note + "Đã cập nhật nghề nghiệp"; }
+                                if (!nguoiHienMauVm.DiaChi.Equals(nguoiHM.DiaChi)) { nguoiHM.DiaChi = nguoiHienMauVm.DiaChi; _context.NguoiHienMau.Update(nguoiHM); nguoiHienMauVm.Note = nguoiHienMauVm.Note + "Đã cập nhật địa chỉ"; }
                                 list_result.Add(nguoiHienMauVm);
                             }
                         }
@@ -176,11 +130,58 @@ namespace TonVinhHienMau.Controllers
                             continue;
                         }
                     }
-                    _context.SaveChanges();
                 }
 
             }
             return new JsonResult(list_result);
+        }
+
+
+        [HttpPost("SaveChanges")]
+        public IActionResult importPeople(Guid DottonvinhId, Guid DonViId, List<NguoiHienMauVm> nguoiHienMauVms)
+        {
+            foreach(var item in nguoiHienMauVms)
+            {
+                NguoiHienMau nguoiHienMau = new NguoiHienMau()
+                {
+                    Id = Guid.NewGuid(),
+                    MaNguoiHien = _hienMau.NonUnicode(item.HoTen) + _hienMau.NonUnicode(item.NamSinh.ToString()) + _hienMau.NonUnicode(item.NhomMau),
+                    HoTen = item.HoTen,
+                    GioiTinh = Convert.ToBoolean(item.GioiTinh),
+                    NamSinh = Convert.ToInt32(item.NamSinh),
+                    NgheNghiep = item.NgheNghiep,
+                    DiaChi = item.DiaChi,
+                    NhomMau = item.NhomMau,
+                    TV_5 = item.TV_5,
+                    TV_10 = item.TV_10,
+                    TV_15 = item.TV_15,
+                    TV_20 = item.TV_20,
+                    TV_30 = item.TV_30,
+                    TV_40 = item.TV_40,
+                    TV_50 = item.TV_50,
+                    TV_60 = item.TV_60,
+                    TV_70 = item.TV_70,
+                    TV_80 = item.TV_80,
+                    TV_90 = item.TV_90,
+                    TV_100 = item.TV_100,
+                    DonViId = DonViId,
+                    DotTonVinhId = DottonvinhId
+                };
+                var nguoiHM = _context.NguoiHienMau.FirstOrDefault(s => s.MaNguoiHien.Equals(nguoiHienMau.MaNguoiHien) && s.DonViId.Equals(DonViId) && s.DotTonVinhId.Equals(DottonvinhId));
+
+                if (nguoiHM == null)
+                {
+                    _context.NguoiHienMau.Add(nguoiHienMau);
+                }
+                else
+                {
+                    if (!item.GioiTinh.Equals(nguoiHM.GioiTinh)) { nguoiHM.GioiTinh = item.GioiTinh; _context.NguoiHienMau.Update(nguoiHM); }
+                    if (!item.NgheNghiep.Equals(nguoiHM.NgheNghiep)) { nguoiHM.NgheNghiep = item.NgheNghiep; _context.NguoiHienMau.Update(nguoiHM); }
+                    if (!item.DiaChi.Equals(nguoiHM.DiaChi)) { nguoiHM.DiaChi = item.DiaChi; _context.NguoiHienMau.Update(nguoiHM); }
+                }
+                _context.SaveChanges();
+            }
+            return new JsonResult("Sucess");
         }
 
         [HttpPost("Create")]
@@ -295,5 +296,6 @@ namespace TonVinhHienMau.Controllers
             }
             return new JsonResult(nguoihienau);
         }
+
     }
 }
