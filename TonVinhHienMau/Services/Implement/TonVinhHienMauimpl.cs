@@ -19,25 +19,6 @@ namespace TonVinhHienMau.Services.Implement
 {
     public class TonVinhHienMauimpl : ITonVinhHienMau
     {
-        public List<NguoiHienMauVm> ImportExcel(AppDbContext _context, IFormFile file, Guid? donviId, Guid? dotTonVinhId)
-        {
-            List<NguoiHienMauVm> listresult = new List<NguoiHienMauVm>();
-            if (file?.Length > 0)
-            {
-                var DonVi = _context.DonVi.FirstOrDefault(u => u.Id.Equals(donviId));
-                var NamTV = _context.DotTonVinh.FirstOrDefault(u => u.Id.Equals(dotTonVinhId));
-                var stream = file.OpenReadStream();
-
-                using (var package = new ExcelPackage(stream))
-                {
-                    var worksheet = package.Workbook.Worksheets.First();
-                    var rowCount = worksheet.Dimension.Rows;
-                    int rowStart = 5;
-                    listresult.AddRange(ReadExcel(worksheet, rowCount, rowStart, DonVi.MaDonVi, NamTV.MaDotTonVinh));
-                }
-            }
-            return listresult ;
-        }
         private List<NguoiHienMauVm> ReadExcel(ExcelWorksheet worksheet, int rowCount, int rowStart, string? maDonVi, string? maDotTonVinh)
         {
             List<NguoiHienMauVm> listresult = new List<NguoiHienMauVm>();
@@ -86,6 +67,27 @@ namespace TonVinhHienMau.Services.Implement
             }
             return listresult;
         }
+        public List<NguoiHienMauVm> ImportExcel(AppDbContext _context, IFormFile file, Guid? donviId, Guid? dotTonVinhId)
+        {
+            List<NguoiHienMauVm> listresult = new List<NguoiHienMauVm>();
+            if (file?.Length > 0)
+            {
+                var DonVi = _context.DonVi.FirstOrDefault(u => u.Id.Equals(donviId));
+                var NamTV = _context.DotTonVinh.FirstOrDefault(u => u.Id.Equals(dotTonVinhId));
+                var stream = file.OpenReadStream();
+
+                using (var package = new ExcelPackage(stream))
+                {
+                    var worksheet = package.Workbook.Worksheets.First();
+                    var rowCount = worksheet.Dimension.Rows;
+                    int rowStart = 5;
+                    listresult.AddRange(ReadExcel(worksheet, rowCount, rowStart, DonVi.MaDonVi, NamTV.MaDotTonVinh));
+                }
+            }
+            return listresult ;
+        }
+
+        
     }
 }
 

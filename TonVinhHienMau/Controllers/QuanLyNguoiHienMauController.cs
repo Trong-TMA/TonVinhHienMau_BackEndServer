@@ -72,18 +72,6 @@ namespace TonVinhHienMau.Controllers
                         var nghenghiep = worksheet.Cells[row, 5].Value?.ToString().Trim();
                         var diachi = worksheet.Cells[row, 6].Value?.ToString().Trim();
                         var nhomau = worksheet.Cells[row, 7].Value?.ToString().Trim();
-                        var tv_5 = worksheet.Cells[row, 8].Value?.ToString().Trim();
-                        var tv_10 = worksheet.Cells[row, 9].Value?.ToString().Trim();
-                        var tv_15 = worksheet.Cells[row, 10].Value?.ToString().Trim();
-                        var tv_20 = worksheet.Cells[row, 11].Value?.ToString().Trim();
-                        var tv_30 = worksheet.Cells[row, 12].Value?.ToString().Trim();
-                        var tv_40 = worksheet.Cells[row, 13].Value?.ToString().Trim();
-                        var tv_50 = worksheet.Cells[row, 14].Value?.ToString().Trim();
-                        var tv_60 = worksheet.Cells[row, 15].Value?.ToString().Trim();
-                        var tv_70 = worksheet.Cells[row, 16].Value?.ToString().Trim();
-                        var tv_80 = worksheet.Cells[row, 17].Value?.ToString().Trim();
-                        var tv_90 = worksheet.Cells[row, 18].Value?.ToString().Trim();
-                        var tv_100 = worksheet.Cells[row, 19].Value?.ToString().Trim();
 
                         if (hoten != null && namsinh != null && nhomau !=null)
                         {
@@ -95,18 +83,6 @@ namespace TonVinhHienMau.Controllers
                                 NgheNghiep = nghenghiep,
                                 DiaChi = diachi,
                                 NhomMau = nhomau,
-                                TV_5 = tv_5,
-                                TV_10 = tv_10,
-                                TV_15 = tv_15,
-                                TV_20 = tv_20,
-                                TV_30 = tv_30,
-                                TV_40 = tv_40,
-                                TV_50 = tv_50,
-                                TV_60 = tv_60,
-                                TV_70 = tv_70,
-                                TV_80 = tv_80,
-                                TV_90 = tv_90,
-                                TV_100 = tv_100,
                                 Note = "",
                             };
                             var MaNguoiHien = _hienMau.NonUnicode(hoten) + _hienMau.NonUnicode(namsinh) + _hienMau.NonUnicode(nhomau);
@@ -114,7 +90,7 @@ namespace TonVinhHienMau.Controllers
 
                             if (nguoiHM == null)
                             {
-                                nguoiHienMauVm.Note = "Danh sách thêm mới";
+                                nguoiHienMauVm.Note = "Thêm mới";
                                 list_result.Add(nguoiHienMauVm);
                             }
                             else
@@ -152,18 +128,6 @@ namespace TonVinhHienMau.Controllers
                     NgheNghiep = item.NgheNghiep,
                     DiaChi = item.DiaChi,
                     NhomMau = item.NhomMau,
-                    TV_5 = item.TV_5,
-                    TV_10 = item.TV_10,
-                    TV_15 = item.TV_15,
-                    TV_20 = item.TV_20,
-                    TV_30 = item.TV_30,
-                    TV_40 = item.TV_40,
-                    TV_50 = item.TV_50,
-                    TV_60 = item.TV_60,
-                    TV_70 = item.TV_70,
-                    TV_80 = item.TV_80,
-                    TV_90 = item.TV_90,
-                    TV_100 = item.TV_100,
                     DonViId = DonViId,
                     DotTonVinhId = DottonvinhId
                 };
