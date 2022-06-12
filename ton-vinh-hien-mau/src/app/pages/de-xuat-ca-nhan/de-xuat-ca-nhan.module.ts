@@ -15,6 +15,9 @@ import { NzFormModule} from 'ng-zorro-antd/form';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { FileUploadModule } from 'primeng/fileupload';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 const icons: IconDefinition[] = [
   StepBackwardOutline,
   CaretLeftOutline,
@@ -29,13 +32,15 @@ const icons: IconDefinition[] = [
     CommonModule,
     NzSelectModule,
     NzStepsModule,
-    DeXuatCaNhanRoutingModule,
     NzButtonModule,
     NzIconModule.forChild(icons),
     NzFormModule,
     ReactiveFormsModule,
     NzUploadModule,
-    NzButtonModule
+    NzButtonModule,
+    FileUploadModule,
+    NzTableModule,
+    NzSpinModule
   ],
   exports:[
     DeXuatCaNhanComponent

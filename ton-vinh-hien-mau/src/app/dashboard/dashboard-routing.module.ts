@@ -1,3 +1,5 @@
+import { LichSuTonVinhComponent } from './../pages/lich-su-ton-vinh/lich-su-ton-vinh.component';
+import { LichSuTonVinhModule } from './../pages/lich-su-ton-vinh/lich-su-ton-vinh.module';
 import { ImportNguoiHienMauComponent } from './../pages/import-nguoi-hien-mau/import-nguoi-hien-mau.component';
 
 import { DanhSachHienMauCreateComponent } from './../pages/danh-sach-hien-mau/danh-sach-hien-mau-create/danh-sach-hien-mau-create.component';
@@ -40,6 +42,10 @@ const routes: Routes = [
     {
       path: 'Import-nguoi-hien-mau',
       component: ImportNguoiHienMauComponent,
+    },
+    {
+      path: 'Lich-su-ton-vinh',
+      component: LichSuTonVinhComponent,
     }
   ] },
 ];

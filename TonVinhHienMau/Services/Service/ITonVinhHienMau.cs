@@ -11,6 +11,7 @@ namespace TonVinhHienMau.Services.Service
 {
     public interface ITonVinhHienMau
     {
-        public List<NguoiHienMauVm> ImportExcel(AppDbContext _context, IFormFile file, Guid? DonviId, Guid? DotTonVinhId);
+        public List<NguoiHienMauVm> ImportExcel(AppDbContext _context, IFormFile file, Guid DonviId, Guid DotTonVinhId);
+
     }
 }

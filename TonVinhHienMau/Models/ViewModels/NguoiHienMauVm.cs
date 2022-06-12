@@ -4,7 +4,7 @@ namespace TonVinhHienMau.Models.ViewModels
 {
     public class NguoiHienMauVm
     {
-        public Guid Id { get; set; } 
+        public Guid Id { get; set; }
         public string HoTen { get; set; }
 
         public bool GioiTinh { get; set; }
@@ -39,6 +39,8 @@ namespace TonVinhHienMau.Models.ViewModels
         public string TV_90 { get; set; }
 
         public string TV_100 { get; set; }
+        public string TV {get;set;}
+        public string TVDX {get;set;}
 
         public string Note { get;set; }
     }

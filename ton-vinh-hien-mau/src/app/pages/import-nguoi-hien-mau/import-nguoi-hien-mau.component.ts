@@ -52,7 +52,12 @@ export class ImportNguoiHienMauComponent implements OnInit {
     this.donviid ="";
     this.dottonvinid ="";
     this.listNguoihienmauimport = [];
-
+    this.router.navigate(["/Danh-sach-hien-mau"], {
+      // skipLocationChange: true,
+      // queryParams:{
+      //   id: ''
+      // }
+    })
   }
 
   onSelect(event: any) {
