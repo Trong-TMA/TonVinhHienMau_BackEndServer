@@ -34,15 +34,15 @@
         <nz-form-control [nzSpan]="12">
           <p-fileUpload (onSelect)="onSelect($event)" [showUploadButton]="false" [showCancelButton]="false" chooseLabel="Chọn file"
                 accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
-            <ng-template pTemplate="content">
-                <ul *ngIf="datafile.length">
-                    <li *ngFor="let file of datafile">
-                      <div class="d-flex justify-content-between">
-                        <div>{{file.name}} - {{file.size}} bytes</div>
-                        <div><button class="btn btn-primary" (click)="deleteFile(file)">X</button></div>
-                      </div>
-                    </li>
-                </ul>
+            <ng-template pTemplate="toolbar">
+                <span *ngIf="datafile.length">
+                  <div *ngFor="let file of datafile">
+                    <div class="d-flex justify-content-between align-items-center w-100">
+                      <div class="file-name">{{file.name}}</div>
+                      <div class="btn-deleteFile" (click)="deleteFile(file)">X</div>
+                    </div>
+                  </div>
+                </span>
             </ng-template>
             <ng-template let-file pTemplate="file"></ng-template>
           </p-fileUpload>
