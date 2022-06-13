@@ -255,6 +255,7 @@ namespace TonVinhHienMau.Controllers
         [HttpGet("Search")]
         public IActionResult Search(string searchString,bool gioitinh,string namsinh)
         {
+            
             var nguoihienau = _context.NguoiHienMau.ToList();
             nguoihienau = nguoihienau.Where(u=>u.GioiTinh.Equals(gioitinh)).ToList();
             if (searchString != "null")
@@ -270,7 +271,18 @@ namespace TonVinhHienMau.Controllers
             {        
                 nguoihienau = nguoihienau.Where(u=>u.NamSinh.Equals(Int32.Parse(namsinh))).ToList();
             }
-            return new JsonResult(nguoihienau);
+            return new JsonResult(nguoihienau.Select(u => new HienMauVM()
+                {
+                    Id = u.Id,
+                    HoTen = u.HoTen,
+                    GioiTinh = u.GioiTinh,
+                    NamSinh = u.NamSinh,
+                    NgheNghiep = u.NgheNghiep,
+                    DiaChi = u.DiaChi,
+                    NhomMau = u.NhomMau,
+                    TV = _hienMau.getHightTV(_context, u.Id),
+                }).OrderBy(u => u.HoTen)
+            );
         }
 
     }
