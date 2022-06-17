@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -36,6 +37,7 @@ namespace TonVinhHienMau.Controllers
 
         [HttpPost("Import")]
         [Consumes("multipart/form-data")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         public IActionResult Import(Guid DotTonVinhId, Guid DonviId, IFormFile file)
         {
             var result = _tonVinhHienMau.ImportExcel(_context,file,DonviId,DotTonVinhId);
@@ -43,6 +45,7 @@ namespace TonVinhHienMau.Controllers
         }
 
         [HttpPost("SaveChanges")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         public IActionResult SaveChanges(Guid DottonvinhId, Guid DonViId, List<NguoiHienMauVm> nguoiHienMauVms)
         {
             foreach (var item in nguoiHienMauVms)
@@ -108,6 +111,7 @@ namespace TonVinhHienMau.Controllers
 
 
         [HttpPost("ExportALL")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         public IActionResult Export(Guid? idDonVi)
         {
             var checkdonvi = _context.DonVi.Find(idDonVi);

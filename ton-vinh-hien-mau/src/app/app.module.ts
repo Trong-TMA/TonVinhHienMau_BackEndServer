@@ -17,14 +17,18 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import {ButtonModule} from 'primeng/button';
 import { registerLocaleData } from '@angular/common';
 import vi from '@angular/common/locales/vi';
 registerLocaleData(vi);
 import { NZ_DATE_LOCALE, NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
-
+import { AuthInterceptor } from './auth/auth.interceptor';
+import { JwtModule } from '@auth0/angular-jwt';
+export function tokenGetter(){
+  return localStorage.getItem("token");
+}
 @NgModule({
   declarations: [
     AppComponent
@@ -45,11 +49,22 @@ import { NZ_DATE_LOCALE, NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
     DonViModule,
     DanhSachHienMauModule,
     ImportNguoiHienMauModule,
-    LichSuTonVinhModule
+    LichSuTonVinhModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["localhost:5000", "localhost:5001"],
+        disallowedRoutes: []
+      }
+    }),
   ],
   providers: [
     { provide: NZ_I18N, useValue: vi_VN },
     { provide: NZ_DATE_LOCALE, useValue: vi},
+    {
+      provide: [HTTP_INTERCEPTORS],
+      multi: true,
+      useClass: AuthInterceptor },
   ],
   bootstrap: [AppComponent]
 })

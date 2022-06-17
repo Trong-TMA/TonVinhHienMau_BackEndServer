@@ -46,18 +46,20 @@ export class ImportNguoiHienMauComponent implements OnInit {
   }
 
   done(){
-    this.saveChange();
-    this.current = 0;
-    this.datafile = [];
-    this.donviid ="";
-    this.dottonvinid ="";
-    this.listNguoihienmauimport = [];
-    this.router.navigate(["/Danh-sach-hien-mau"], {
-      // skipLocationChange: true,
-      // queryParams:{
-      //   id: ''
-      // }
+    this.nguoihienmauService.save(this.dottonvinid,this.donviid,this.listNguoihienmauimport).subscribe((item)=>{
+      this.current = 0;
+      this.datafile = [];
+      this.donviid ="";
+      this.dottonvinid ="";
+      this.listNguoihienmauimport = [];
+      this.router.navigate(["/Danh-sach-hien-mau"], {
+        // skipLocationChange: true,
+        // queryParams:{
+        //   id: ''
+        // }
+      })
     })
+    
   }
 
   onSelect(event: any) {
@@ -81,11 +83,6 @@ export class ImportNguoiHienMauComponent implements OnInit {
       this.listNguoihienmauimport = item
     })
   }
-  saveChange(){
-    this.nguoihienmauService.save(this.dottonvinid,this.donviid,this.listNguoihienmauimport).subscribe((item)=>{
-    })
-  }
-
   loadData(){
     this.loadDataEmit.emit();
   }

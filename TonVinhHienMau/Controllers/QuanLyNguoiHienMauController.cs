@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OfficeOpenXml;
@@ -29,6 +30,7 @@ namespace TonVinhHienMau.Controllers
         }
 
         [HttpGet("getAll")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         public IActionResult GetAll()
         {
             var nguoihienmau = _context.NguoiHienMau.Select(u=> new HienMauVM()
@@ -48,6 +50,7 @@ namespace TonVinhHienMau.Controllers
 
         [HttpPost("AddFromExceltoData")]
         [Consumes("multipart/form-data")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         public IActionResult importPeople(Guid DottonvinhId, Guid DonViId, IFormFile file)
         {
             var DonVi =  _context.DonVi.Where(u => u.Id.Equals(DonViId) && u.IsDeleted != true).FirstOrDefault();
@@ -114,6 +117,7 @@ namespace TonVinhHienMau.Controllers
 
 
         [HttpPost("SaveChanges")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         public IActionResult importPeople(Guid DottonvinhId, Guid DonViId, List<NguoiHienMauVm> nguoiHienMauVms)
         {
             foreach(var item in nguoiHienMauVms)
@@ -161,6 +165,7 @@ namespace TonVinhHienMau.Controllers
         }
 
         [HttpPost("Create")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         public IActionResult CreateNguoiHienMau(Guid DottonvinhId, Guid DonViId, NguoiHienMauVm hienMauVM)
         {
             var maNguoiHien = _hienMau.NonUnicode(hienMauVM.HoTen) + _hienMau.NonUnicode(hienMauVM.NamSinh.ToString()) + _hienMau.NonUnicode(hienMauVM.NhomMau);
@@ -204,6 +209,7 @@ namespace TonVinhHienMau.Controllers
         }
 
         [HttpPost("Edit")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         public IActionResult EditNguoiHienMau(HienMauVM hienMauVM)
         {
             var ng = _context.NguoiHienMau.FirstOrDefault(u=>u.Id.Equals(hienMauVM.Id));
@@ -241,6 +247,7 @@ namespace TonVinhHienMau.Controllers
         }
 
         [HttpPut("Delete")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         public IActionResult DeleteNguoiHienMau(Guid NguoihienmauId)
         {
             var ng = _context.NguoiHienMau.FirstOrDefault(u => u.Id.Equals(NguoihienmauId));
@@ -253,6 +260,7 @@ namespace TonVinhHienMau.Controllers
         }
 
         [HttpGet("Search")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         public IActionResult Search(string searchString,bool gioitinh,string namsinh)
         {
             

@@ -1,18 +1,24 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using System;
+using TonVinhHienMau.Data.Models;
 using TonVinhHienMau.Models;
 
 namespace TonVinhHienMau.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 
         }
+
         public DbSet<NguoiHienMau> NguoiHienMau { get; set; }
         public DbSet<DonVi> DonVi { get; set; }
         public DbSet<DotTonVinh> DotTonVinh {get;set;}
 
+        public DbSet<ApplicationUser> ApplicationUsers {get; set;}
     }
 }

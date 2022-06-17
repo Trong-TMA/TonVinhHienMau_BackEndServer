@@ -132,6 +132,7 @@ namespace TonVinhHienMau.Services.Implement
                             nguoiHM.TV_90 = null;
                             nguoiHM.TV_100 = null;
                             _context.NguoiHienMau.Update(nguoiHM);
+                            item.TVDX = excel.ToString();
                             item.Note = "Đã cập nhật mức tôn vinh mới là: " + excel;
 
                         }                       

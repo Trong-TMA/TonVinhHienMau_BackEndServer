@@ -14,6 +14,7 @@ export class DonviService {
     private http: HttpClient,
     private router: Router) {
       this._sharedHeaders = this._sharedHeaders.set('Content-Type', 'application/json');
+
   }
 
   getAllDonvi(){

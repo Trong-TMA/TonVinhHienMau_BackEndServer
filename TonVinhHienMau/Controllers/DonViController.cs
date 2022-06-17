@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -23,12 +24,14 @@ namespace TonVinhHienMau.Controllers
         }
 
         [HttpGet("")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         public IActionResult GetAll()
         {
             return new JsonResult(_context.DonVi.Where(u=>u.IsDeleted!= true).OrderBy(u => u.TenDonVi));
         }
 
         [HttpPost("create")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         public IActionResult Create(DonViVM donViVM)
         {
             if (!string.IsNullOrEmpty(donViVM.TenDonVi) && !string.IsNullOrEmpty(donViVM.MaDonVi))
@@ -48,6 +51,7 @@ namespace TonVinhHienMau.Controllers
         }
 
         [HttpPost("edit")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         public IActionResult Edit(DonViVM donViVM)
         {
             var dv = _context.DonVi.FirstOrDefault(u => u.Id.Equals(donViVM.Id));
@@ -71,6 +75,7 @@ namespace TonVinhHienMau.Controllers
         }
 
         [HttpPut("delete")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         public IActionResult Delete(Guid DonViId)
         {
             var dv = _context.DonVi.FirstOrDefault(u => u.Id.Equals(DonViId));
