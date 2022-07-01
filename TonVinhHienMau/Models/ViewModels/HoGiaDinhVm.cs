@@ -1,33 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TonVinhHienMau.Models.ViewModels
 {
-    public class NguoiHienMauVm
+    public class HoGiaDinhVm
     {
-        public Guid Id { get; set; }
         public string Stt { get; set; }
-        public string HoTen { get; set; }
+        public string TenGiaDinh { get; set; }
 
-        public string Code { get; set; }
-        public bool GioiTinh { get; set; }
-
-        public int NamSinh { get; set; }
-
-        public string NgheNghiep { get; set; }
-
-        public string DiaChi { get; set; }
-        public string NhomMau { get; set; }
+        public List<NguoiHienMau> NguoiHienMaus { get; set; }
 
         public string TV_5 { get; set; }
-
         public string TV_10 { get; set; }
-
         public string TV_15 { get; set; }
-
         public string TV_20 { get; set; }
 
         public string TV_30 { get; set; }
-
         public string TV_40 { get; set; }
 
         public string TV_50 { get; set; }
@@ -41,9 +29,12 @@ namespace TonVinhHienMau.Models.ViewModels
         public string TV_90 { get; set; }
 
         public string TV_100 { get; set; }
-        public string TV {get;set;}
-        public string TVDX {get;set;}
 
-        public string Note { get;set; }
+        public Guid DonViId { get; set; }
+
+        public Guid ChuHoId { get; set; }
+
+        public Guid DotTonVinhId { get; set; }
+
     }
 }

@@ -76,6 +76,19 @@ namespace TonVinhHienMau.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MoiQuanHe",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TenMQH = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    GiaDinhId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MoiQuanHe", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -182,6 +195,44 @@ namespace TonVinhHienMau.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "HoGiaDinh",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TenGiaDinh = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    TV_5 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TV_10 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TV_15 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TV_20 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TV_30 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TV_40 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TV_50 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TV_60 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TV_70 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TV_80 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TV_90 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TV_100 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DonViId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DotTonVinhId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HoGiaDinh", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_HoGiaDinh_DonVi_DonViId",
+                        column: x => x.DonViId,
+                        principalTable: "DonVi",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_HoGiaDinh_DotTonVinh_DotTonVinhId",
+                        column: x => x.DotTonVinhId,
+                        principalTable: "DotTonVinh",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "NguoiHienMau",
                 columns: table => new
                 {
@@ -206,7 +257,8 @@ namespace TonVinhHienMau.Migrations
                     TV_90 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TV_100 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DonViId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DotTonVinhId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    DotTonVinhId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    HoGiaDinhId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -223,12 +275,13 @@ namespace TonVinhHienMau.Migrations
                         principalTable: "DotTonVinh",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_NguoiHienMau_HoGiaDinh_HoGiaDinhId",
+                        column: x => x.HoGiaDinhId,
+                        principalTable: "HoGiaDinh",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "fae512b5-c142-4bf6-8379-90e0656b0d06", 0, "dfd998e2-80ae-4d16-97e0-570ec7e9b52e", null, false, false, null, null, "Admin", "AQAAAAEAACcQAAAAEHpsGXl8oMND7btfsp/ewUIjZ+iSQErMH47XyDLtQjEPrJ+eobva/PYuZF0SrI8AmQ==", null, false, "e0501222-5c00-41e4-8185-061378003477", false, "Admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -270,6 +323,16 @@ namespace TonVinhHienMau.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_HoGiaDinh_DonViId",
+                table: "HoGiaDinh",
+                column: "DonViId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HoGiaDinh_DotTonVinhId",
+                table: "HoGiaDinh",
+                column: "DotTonVinhId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_NguoiHienMau_DonViId",
                 table: "NguoiHienMau",
                 column: "DonViId");
@@ -278,6 +341,11 @@ namespace TonVinhHienMau.Migrations
                 name: "IX_NguoiHienMau_DotTonVinhId",
                 table: "NguoiHienMau",
                 column: "DotTonVinhId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NguoiHienMau_HoGiaDinhId",
+                table: "NguoiHienMau",
+                column: "HoGiaDinhId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -298,6 +366,9 @@ namespace TonVinhHienMau.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "MoiQuanHe");
+
+            migrationBuilder.DropTable(
                 name: "NguoiHienMau");
 
             migrationBuilder.DropTable(
@@ -305,6 +376,9 @@ namespace TonVinhHienMau.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "HoGiaDinh");
 
             migrationBuilder.DropTable(
                 name: "DonVi");

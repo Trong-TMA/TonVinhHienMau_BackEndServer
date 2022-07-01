@@ -1,3 +1,5 @@
+import { DeXuatHoGiaDinhModule } from './pages/de-xuat-ho-gia-dinh/de-xuat-ho-gia-dinh.module';
+
 import { LichSuTonVinhModule } from './pages/lich-su-ton-vinh/lich-su-ton-vinh.module';
 import { ImportNguoiHienMauModule } from './pages/import-nguoi-hien-mau/import-nguoi-hien-mau.module';
 import { DanhSachHienMauModule } from './pages/danh-sach-hien-mau/danh-sach-hien-mau.module';
@@ -31,7 +33,7 @@ export function tokenGetter(){
 }
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +52,7 @@ export function tokenGetter(){
     DanhSachHienMauModule,
     ImportNguoiHienMauModule,
     LichSuTonVinhModule,
+    DeXuatHoGiaDinhModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

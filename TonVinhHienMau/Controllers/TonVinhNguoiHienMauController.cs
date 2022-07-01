@@ -110,27 +110,57 @@ namespace TonVinhHienMau.Controllers
         }
 
 
-        [HttpPost("ExportALL")]
-        [Authorize(AuthenticationSchemes = "Bearer")]
-        public IActionResult Export(Guid? idDonVi)
+        [HttpGet("ExportALL")]
+        /*[Authorize(AuthenticationSchemes = "Bearer")]*/
+        public IActionResult Export(Guid? idDottonvinh, Guid? idDonVi)
         {
+            var listNguoiHienMau = _context.NguoiHienMau.ToList();
             var checkdonvi = _context.DonVi.Find(idDonVi);
-            if (checkdonvi != null)
+            var checkdottonvinh = _context.DotTonVinh.Find(idDottonvinh);
+
+            if (checkdonvi != null )
             {
-                var listNguoiHienMau = _context.NguoiHienMau.ToList();
-                using (XLWorkbook wb = new XLWorkbook())
-                {
-                    wb.Worksheets.Add(Common.ToDataTable(listNguoiHienMau.ToList()));
-                    using (MemoryStream stream = new MemoryStream())
-                    {
-                        wb.SaveAs(stream);
-                        return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Danh sách người hiến máu của đơn vị"+ checkdonvi.TenDonVi.ToString() + ".xlsx");
-                    }
-                }
+                listNguoiHienMau = listNguoiHienMau.Where(u=>u.DonViId.Equals(idDonVi)).ToList();
             }
-            else
+            if (checkdottonvinh != null)
             {
-                return Ok("Không tải xuống được");
+                listNguoiHienMau = listNguoiHienMau.Where(u=>u.DotTonVinhId.Equals(idDottonvinh)).ToList();
+            }
+
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                int count = 1;
+                var listNHM = listNguoiHienMau.Select(u => new NguoiHienMauExportVm()
+                {
+                    Stt = count++.ToString(),
+                    HoTen = u.HoTen,
+                    GioiTinh = u.GioiTinh,
+                    NamSinh = u.NamSinh,
+                    NgheNghiep = u.NgheNghiep,
+                    DiaChi = u.DiaChi,
+                    NhomMau = u.NhomMau,
+                    TV_5 = u.TV_5,
+                    TV_10 = u.TV_10,
+                    TV_15 = u.TV_15,
+                    TV_20 = u.TV_20,
+                    TV_30 = u.TV_30,
+                    TV_40 = u.TV_40,
+                    TV_50 = u.TV_50,
+                    TV_60 = u.TV_60,
+                    TV_70 = u.TV_70,
+                    TV_80 = u.TV_80,
+                    TV_90 = u.TV_90,
+                    TV_100 = u.TV_100,
+
+                });
+                wb.Worksheets.Add(Common.ToDataTable(listNHM.ToList()));
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), 
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", 
+                        "Danh sách người hiến máu của đơn vị" + checkdonvi.TenDonVi.ToString() + ".xlsx");
+                }
             }
         }
 

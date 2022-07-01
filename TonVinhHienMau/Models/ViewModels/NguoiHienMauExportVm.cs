@@ -1,15 +1,10 @@
-﻿using System;
-
-namespace TonVinhHienMau.Models.ViewModels
+﻿namespace TonVinhHienMau.Models.ViewModels
 {
-    public class NguoiHienMauVm
+    public class NguoiHienMauExportVm
     {
-        public Guid Id { get; set; }
         public string Stt { get; set; }
         public string HoTen { get; set; }
-
-        public string Code { get; set; }
-        public bool GioiTinh { get; set; }
+        public bool? GioiTinh { get; set; }
 
         public int NamSinh { get; set; }
 
@@ -41,9 +36,5 @@ namespace TonVinhHienMau.Models.ViewModels
         public string TV_90 { get; set; }
 
         public string TV_100 { get; set; }
-        public string TV {get;set;}
-        public string TVDX {get;set;}
-
-        public string Note { get;set; }
     }
 }

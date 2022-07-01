@@ -46,4 +46,10 @@ export class QuanLyNguoiHienMauService {
   save(dottonvinhid: any, donviid: any, listnguoihienmau: any){
     return this.http.post(`${environment.apiUrl}/api/QuanLyNguoiHienMau/SaveChanges?DottonvinhId=${dottonvinhid}&DonViId=${donviid}`,listnguoihienmau,{headers: this._sharedHeaders,});
   }
+
+  export(dottonvinhid: any, donviid: any){
+    return this.http.get(`${environment.apiUrl}/api/TonVinhNguoiHienMau/ExportALL?idDottonvinh=${dottonvinhid}&idDonVi=${donviid}`,{
+      responseType: 'blob'
+    });
+  }
 }

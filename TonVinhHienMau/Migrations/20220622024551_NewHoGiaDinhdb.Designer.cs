@@ -10,8 +10,8 @@ using TonVinhHienMau.Data;
 namespace TonVinhHienMau.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220613105010_init")]
-    partial class init
+    [Migration("20220622024551_NewHoGiaDinhdb")]
+    partial class NewHoGiaDinhdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -215,22 +215,6 @@ namespace TonVinhHienMau.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "fae512b5-c142-4bf6-8379-90e0656b0d06",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "dfd998e2-80ae-4d16-97e0-570ec7e9b52e",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedUserName = "Admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHpsGXl8oMND7btfsp/ewUIjZ+iSQErMH47XyDLtQjEPrJ+eobva/PYuZF0SrI8AmQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "e0501222-5c00-41e4-8185-061378003477",
-                            TwoFactorEnabled = false,
-                            UserName = "Admin"
-                        });
                 });
 
             modelBuilder.Entity("TonVinhHienMau.Models.DonVi", b =>
@@ -281,6 +265,88 @@ namespace TonVinhHienMau.Migrations
                     b.ToTable("DotTonVinh");
                 });
 
+            modelBuilder.Entity("TonVinhHienMau.Models.HoGiaDinh", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("DonViId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("DotTonVinhId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("MaChuHo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TV_10")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TV_100")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TV_15")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TV_20")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TV_30")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TV_40")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TV_5")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TV_50")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TV_60")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TV_70")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TV_80")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TV_90")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TenGiaDinh")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DonViId");
+
+                    b.HasIndex("DotTonVinhId");
+
+                    b.ToTable("HoGiaDinh");
+                });
+
+            modelBuilder.Entity("TonVinhHienMau.Models.MoiQuanHe", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("TenMQH")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MoiQuanHe");
+                });
+
             modelBuilder.Entity("TonVinhHienMau.Models.NguoiHienMau", b =>
                 {
                     b.Property<Guid>("Id")
@@ -299,6 +365,9 @@ namespace TonVinhHienMau.Migrations
 
                     b.Property<bool?>("GioiTinh")
                         .HasColumnType("bit");
+
+                    b.Property<Guid?>("HoGiaDinhId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("HoTen")
                         .HasMaxLength(500)
@@ -363,6 +432,8 @@ namespace TonVinhHienMau.Migrations
 
                     b.HasIndex("DotTonVinhId");
 
+                    b.HasIndex("HoGiaDinhId");
+
                     b.ToTable("NguoiHienMau");
                 });
 
@@ -417,7 +488,7 @@ namespace TonVinhHienMau.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TonVinhHienMau.Models.NguoiHienMau", b =>
+            modelBuilder.Entity("TonVinhHienMau.Models.HoGiaDinh", b =>
                 {
                     b.HasOne("TonVinhHienMau.Models.DonVi", "DonVis")
                         .WithMany()
@@ -434,6 +505,34 @@ namespace TonVinhHienMau.Migrations
                     b.Navigation("DonVis");
 
                     b.Navigation("DotTonVinhs");
+                });
+
+            modelBuilder.Entity("TonVinhHienMau.Models.NguoiHienMau", b =>
+                {
+                    b.HasOne("TonVinhHienMau.Models.DonVi", "DonVis")
+                        .WithMany()
+                        .HasForeignKey("DonViId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TonVinhHienMau.Models.DotTonVinh", "DotTonVinhs")
+                        .WithMany()
+                        .HasForeignKey("DotTonVinhId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TonVinhHienMau.Models.HoGiaDinh", null)
+                        .WithMany("NguoiHienMaus")
+                        .HasForeignKey("HoGiaDinhId");
+
+                    b.Navigation("DonVis");
+
+                    b.Navigation("DotTonVinhs");
+                });
+
+            modelBuilder.Entity("TonVinhHienMau.Models.HoGiaDinh", b =>
+                {
+                    b.Navigation("NguoiHienMaus");
                 });
 #pragma warning restore 612, 618
         }

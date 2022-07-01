@@ -24,25 +24,38 @@
 
       <li nz-submenu nzTitle="Quản lý người hiến máu" nzIcon="heart" >
         <ul>
-          <li nz-menu-group class="textLi">
+          <li nz-menu-item class="textLi">
             <a routerLink="Tao-moi" routerLinkActive="active">
               <span>Tạo mới</span>
             </a>
           </li>
-          <li nz-menu-group >
+          <li nz-menu-item >
             <a routerLink="Danh-sach-hien-mau" routerLinkActive="active">
               <span>Danh sách hiến máu</span>
             </a>
           </li>
-          <li nz-menu-group>
+          <li nz-menu-item>
             <a routerLink="Import-nguoi-hien-mau" routerLinkActive="active">
               <span>Nhập dữ liệu</span>
             </a>
           </li>
         </ul>
       </li>
+      <li nz-submenu nzTitle="Lịch sử tôn vinh" nzIcon="history">
+        <ul>
+          <li nz-menu-item class="textLi">
+            <a routerLink="Lich-su-ton-vinh" routerLinkActive="active">
+              <span>Lịch sử tôn vinh</span>
+            </a>
+          </li>
+          <li nz-menu-item >
+            <a routerLink="Export" routerLinkActive="active">
+              <span>Xuất người hiến máu</span>
+            </a>
+          </li>
+        </ul>
+      </li>
       <li nz-submenu nzTitle="Đơn vị hiến máu" routerLink="Don-vi" routerLinkActive="active"></li>
-      <li nz-submenu nzTitle="Lịch sử tôn vinh" routerLink="Lich-su-ton-vinh" routerLinkActive="active"></li>
       <li nz-submenu nzTitle="Đăng xuất" (click)="logout()"></li>
     </ul>
   </nz-header>

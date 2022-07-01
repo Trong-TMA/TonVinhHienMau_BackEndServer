@@ -1,3 +1,4 @@
+import { ExportComponent } from './../pages/lich-su-ton-vinh/export/export.component';
 import { LichSuTonVinhComponent } from './../pages/lich-su-ton-vinh/lich-su-ton-vinh.component';
 import { LichSuTonVinhModule } from './../pages/lich-su-ton-vinh/lich-su-ton-vinh.module';
 import { ImportNguoiHienMauComponent } from './../pages/import-nguoi-hien-mau/import-nguoi-hien-mau.component';
@@ -5,12 +6,12 @@ import { ImportNguoiHienMauComponent } from './../pages/import-nguoi-hien-mau/im
 import { DanhSachHienMauCreateComponent } from './../pages/danh-sach-hien-mau/danh-sach-hien-mau-create/danh-sach-hien-mau-create.component';
 import { DanhSachHienMauComponent } from './../pages/danh-sach-hien-mau/danh-sach-hien-mau.component';
 import { DonViComponent } from './../pages/don-vi/don-vi.component';
-import { DeXuatHoGiaDinhComponent } from './../pages/de-xuat-ho-gia-dinh/de-xuat-ho-gia-dinh.component';
 import { DashboardComponent } from './dashboard.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { DotTonVinhComponent } from '../pages/dot-ton-vinh/dot-ton-vinh.component';
 import { DeXuatCaNhanComponent } from '../pages/de-xuat-ca-nhan/de-xuat-ca-nhan.component';
+import { DeXuatHoGiaDinhComponent } from '../pages/de-xuat-ho-gia-dinh/de-xuat-ho-gia-dinh.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent,
@@ -46,6 +47,10 @@ const routes: Routes = [
     {
       path: 'Lich-su-ton-vinh',
       component: LichSuTonVinhComponent,
+    },
+    {
+      path: 'Export',
+      component: ExportComponent
     }
   ] },
 ];

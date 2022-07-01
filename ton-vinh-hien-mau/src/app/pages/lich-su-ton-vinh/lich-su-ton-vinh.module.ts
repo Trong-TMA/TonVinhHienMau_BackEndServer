@@ -19,6 +19,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ButtonModule } from 'primeng/button';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { ExportComponent } from './export/export.component';
 
 
 
@@ -28,7 +29,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
     LichSuTonVinhComponent,
     LichSuTonVinhListComponent,
     LichSuTonVinhSearchComponent,
-    LichSuTonVinhListEditComponent
+    LichSuTonVinhListEditComponent,
+    ExportComponent
   ],
   imports: [
     CommonModule,

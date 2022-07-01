@@ -56,6 +56,7 @@ namespace TonVinhHienMau
             // Cấu hình các thông tin Interface & Implement
             services.AddTransient<IHienMau, HienMau>();
             services.AddTransient<ITonVinhHienMau, TonVinhHienMauimpl>();
+            services.AddTransient<ITonVinhHoGiaDinh, TonVinhHoGiaDinhimpl>();
 
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
 
