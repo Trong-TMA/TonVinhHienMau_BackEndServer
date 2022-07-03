@@ -1,3 +1,5 @@
+import { NguoiHienMau } from 'src/app/shared/models/nguoihienmau.model';
+import { DeXuatHoGiaDinhService } from './../../shared/services/de-xuat-ho-gia-dinh.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -19,15 +21,17 @@ export class DeXuatHoGiaDinhComponent implements OnInit {
   dottonvinhs:any;
   donvis:any;
   listNguoihienmauimport:any;
+  listHogiadinhimport:any;
   datafile: File[] = [];
   current = 0;
   count = 0;
   @Output() loadDataEmit: EventEmitter<any>;
+  isVisible = false;
 
 
   constructor(
     private fb: FormBuilder,
-    private nguoihienmauService: DeXuatNguoiHienMauService,
+    private hogiadinhService: DeXuatHoGiaDinhService,
     private dottonvinhService : DottonvinhService,
     private donviService : DonviService,
     private router: Router,
@@ -37,7 +41,12 @@ export class DeXuatHoGiaDinhComponent implements OnInit {
 
   }
 
+  showModal(item: any){
+    this.isVisible = true
+    this.listNguoihienmauimport = item.nguoiHienMausVm
+    console.log(item.nguoiHienMausVm);
 
+  }
 
   pre(): void {
     this.current -= 1;
@@ -47,12 +56,13 @@ export class DeXuatHoGiaDinhComponent implements OnInit {
   }
 
   done(){
-    this.nguoihienmauService.save(this.dottonvinid,this.donviid,this.listNguoihienmauimport).subscribe((item:any)=>{
+    this.hogiadinhService.save(this.dottonvinid,this.donviid,this.listNguoihienmauimport).subscribe((item:any)=>{
       this.current = 0;
       this.datafile = [];
       this.donviid ="";
       this.dottonvinid ="";
       this.listNguoihienmauimport = [];
+      this.listHogiadinhimport = [];
       this.router.navigate(["/Lich-su-ton-vinh"], {
         // skipLocationChange: true,
         // queryParams:{
@@ -80,8 +90,10 @@ export class DeXuatHoGiaDinhComponent implements OnInit {
     let formData = new FormData();
     formData.append('file', this.datafile[0], this.datafile[0].name);
 
-    this.nguoihienmauService.import(this.dottonvinid,this.donviid,formData).subscribe((item:any)=>{
-      this.listNguoihienmauimport = item
+    this.hogiadinhService.import(this.dottonvinid,this.donviid,formData).subscribe((item:any)=>{
+      this.listHogiadinhimport = item
+      console.log(item);
+
     })
   }
 

@@ -8,8 +8,9 @@ namespace TonVinhHienMau.Models.ViewModels
         public string Stt { get; set; }
         public string TenGiaDinh { get; set; }
 
-        public List<NguoiHienMau> NguoiHienMaus { get; set; }
-
+        public List<NguoiHienMauVm> NguoiHienMausVm{ get; set; }
+        public string TV { get; set;}
+        public string TVDX { get; set;}
         public string TV_5 { get; set; }
         public string TV_10 { get; set; }
         public string TV_15 { get; set; }

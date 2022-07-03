@@ -111,7 +111,7 @@ namespace TonVinhHienMau.Controllers
 
 
         [HttpGet("ExportALL")]
-        /*[Authorize(AuthenticationSchemes = "Bearer")]*/
+        [Authorize(AuthenticationSchemes = "Bearer")]
         public IActionResult Export(Guid? idDottonvinh, Guid? idDonVi)
         {
             var listNguoiHienMau = _context.NguoiHienMau.ToList();

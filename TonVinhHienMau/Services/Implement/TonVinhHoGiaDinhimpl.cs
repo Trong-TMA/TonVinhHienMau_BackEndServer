@@ -19,6 +19,8 @@ namespace TonVinhHienMau.Services.Implement
             List<NguoiHienMauVm> listresult = new List<NguoiHienMauVm>();
             string STTBefo = null;
             string STTAfter = null;
+            string DiachiBefo = null;
+            string DiachiAfter = null;
             for (var row = rowStart; row <= rowCount; row++)
             {
                 var stt = worksheet.Cells[row, 1].Value?.ToString().Trim();
@@ -42,6 +44,7 @@ namespace TonVinhHienMau.Services.Implement
                 var tv_80 = worksheet.Cells[row, 18].Value?.ToString().Trim();
                 var tv_90 = worksheet.Cells[row, 19].Value?.ToString().Trim();
                 var tv_100 = worksheet.Cells[row, 20].Value?.ToString().Trim();
+                var quanhe = worksheet.Cells[row, 21].Value?.ToString().Trim();
 
                 var mqh = worksheet.Cells[row, 21].Value?.ToString().Trim();
 
@@ -49,20 +52,25 @@ namespace TonVinhHienMau.Services.Implement
                 if (hoten != null & namsinh != null)
                 {
                     STTBefo = stt;
+                    DiachiBefo = diachi;
                     if (STTBefo != null)
                     {
                         STTAfter = stt;
+                        DiachiAfter = diachi;
                     }
                     var result = new NguoiHienMauVm()
                     {
+                        Id = Guid.NewGuid(),
                         Stt = STTAfter,
                         HoTen = hoten,
                         Code = NonUnicode(hoten) + NonUnicode(namsinh) + NonUnicode(nhomau),
                         GioiTinh = Convert.ToBoolean(gioitinh),
                         NamSinh = Convert.ToInt32(namsinh),
                         NgheNghiep = nghenghiep,
-                        DiaChi = diachi,
+                        DiaChi = DiachiAfter,
                         NhomMau = nhomau,
+                        TV = tv_canhan, 
+                        Note = quanhe
                     };
 
                     listresult.Add(result);
@@ -70,11 +78,13 @@ namespace TonVinhHienMau.Services.Implement
             }
             return listresult;
         }
-        List<HoGiaDinh> ITonVinhHoGiaDinh.ImportExcel(AppDbContext _context, IFormFile file, Guid DonviId, Guid DotTonVinhId)
+        List<HoGiaDinhVm> ITonVinhHoGiaDinh.ImportExcel(AppDbContext _context, IFormFile file, Guid DonviId, Guid DotTonVinhId)
         {
             List<NguoiHienMauVm> listnguoiHienMauVms = new List<NguoiHienMauVm>();
 
-            List<HoGiaDinh> listresult = new List<HoGiaDinh>();
+            List<HoGiaDinhVm> items = new List<HoGiaDinhVm>();
+
+            List<HoGiaDinhVm> listresult = new List<HoGiaDinhVm>();
 
 
 
@@ -91,52 +101,141 @@ namespace TonVinhHienMau.Services.Implement
                     int rowStart = 4;
                     listnguoiHienMauVms.AddRange(ReadExcel(worksheet, rowCount, rowStart));
                 }
+                int stt = 1;
+                foreach(var item in listnguoiHienMauVms)
+                {
+                    HoGiaDinhVm hoGiaDinhVm = new HoGiaDinhVm() { Stt = stt.ToString()};
+                    hoGiaDinhVm.NguoiHienMausVm = new List<NguoiHienMauVm>();
 
-                for(int i = 1; i <= listnguoiHienMauVms.Count; i++)
+                    if (hoGiaDinhVm.Stt.Equals(item.Stt))
+                    {
+                        hoGiaDinhVm.NguoiHienMausVm.Add(item);
+                        items.Add(hoGiaDinhVm);
+                        continue;
+                        
+                    }
+                    else
+                    {
+                        stt++;
+                        hoGiaDinhVm.Stt = stt.ToString();
+                        hoGiaDinhVm.NguoiHienMausVm.Add(item);
+                        items.Add(hoGiaDinhVm);
+                        continue;
+                    }
+                }
+
+                HoGiaDinhVm hoGiaDinh = new HoGiaDinhVm();
+
+                for(int i = 0; i < items.Count; i++) 
                 {
 
-                    var check = _context.HoGiaDinh.FirstOrDefault(u=>u.MaChuHo.Equals(listnguoiHienMauVms[i].Code));
-                    if (check == null)
+                    if (hoGiaDinh.NguoiHienMausVm == null)
                     {
-                        HoGiaDinh hoGiaDinh = new HoGiaDinh()
+                        hoGiaDinh.NguoiHienMausVm = new List<NguoiHienMauVm>();
+                        hoGiaDinh.TenGiaDinh = "Nhà ông/bà: " + items[i].NguoiHienMausVm.FirstOrDefault().HoTen;
+                        hoGiaDinh.ChuHoId = items[i].NguoiHienMausVm.FirstOrDefault().Id;
+                        hoGiaDinh.NguoiHienMausVm.AddRange(items[i].NguoiHienMausVm);
+                        continue;
+                    }
+                    else
+                    {
+                        if (items[i].Stt.Equals(items[i - 1].Stt))
                         {
-                            Id = Guid.NewGuid(),
-                        };
-
-                        if (hoGiaDinh.NguoiHienMaus == null)
-                        {
-                            hoGiaDinh.NguoiHienMaus.Add(createNguoiHienMau(listnguoiHienMauVms[i], DonviId, DotTonVinhId));
-                            hoGiaDinh.MaChuHo = listnguoiHienMauVms[i].Code;
-                            listresult.Add(hoGiaDinh);
-                            continue;
-                        }
-
-                        if (listnguoiHienMauVms[i].Stt.Equals(listnguoiHienMauVms[i - 1].Stt))
-                        {
-                            foreach(var item in listresult)
+                           hoGiaDinh.NguoiHienMausVm.AddRange(items[i].NguoiHienMausVm);
+                            if ((i+1) == items.Count)
                             {
-                                var kt = item.NguoiHienMaus.Where(u => u.MaNguoiHien.Equals(listnguoiHienMauVms[i].Code));
-
-                                if (kt != null)
-                                {
-                                    item.NguoiHienMaus.Add(createNguoiHienMau(listnguoiHienMauVms[i], DonviId, DotTonVinhId));
-                                }
+                                listresult.Add(hoGiaDinh);
                             }
                         }
                         else
                         {
-                            HoGiaDinh hoGiaDinhNew = new HoGiaDinh()
-                            {
-                                Id = Guid.NewGuid(),
-                            };
-                            hoGiaDinhNew.NguoiHienMaus.Add(createNguoiHienMau(listnguoiHienMauVms[i], DonviId, DotTonVinhId));
                             listresult.Add(hoGiaDinh);
-                            continue;
+                            hoGiaDinh = new HoGiaDinhVm();
+                            hoGiaDinh.NguoiHienMausVm = new List<NguoiHienMauVm>();
+                            hoGiaDinh.TenGiaDinh = "Nhà ông/bà: " + items[i].NguoiHienMausVm.FirstOrDefault().HoTen;
+                            hoGiaDinh.ChuHoId = items[i].NguoiHienMausVm.FirstOrDefault().Id;
+                            hoGiaDinh.NguoiHienMausVm.AddRange(items[i].NguoiHienMausVm);
                         }
+                        
                     }
+                }
+
+                foreach(var item in listresult)
+                {
+                    item.TV = SumTV(item.NguoiHienMausVm);
+                }
+                foreach (var item in listresult)
+                {
+                    item.TVDX = getHightTVExcel(item);
                 }
             }
             return listresult;
+        }
+
+
+        public string getHightTVExcel(HoGiaDinhVm hoGiaDinhVm)
+        {
+            string result = null;
+            if (Int32.Parse(hoGiaDinhVm.TV) >= 5 && Int32.Parse(hoGiaDinhVm.TV) < 10)
+            {
+                result = "Tôn vinh mức 5";
+            }
+            if (Int32.Parse(hoGiaDinhVm.TV) >= 10 && Int32.Parse(hoGiaDinhVm.TV) < 15)
+            {
+                result = "Tôn vinh mức 10";
+            }
+            if (Int32.Parse(hoGiaDinhVm.TV) >= 15 && Int32.Parse(hoGiaDinhVm.TV) < 20)
+            {
+                result = "Tôn vinh mức 15";
+            }
+            if (Int32.Parse(hoGiaDinhVm.TV) >= 20 && Int32.Parse(hoGiaDinhVm.TV) < 30)
+            {
+                result = "Tôn vinh mức 20";
+            }
+            if (Int32.Parse(hoGiaDinhVm.TV) >= 30 && Int32.Parse(hoGiaDinhVm.TV) < 40)
+            {
+                result = "Tôn vinh mức 30";
+            }
+            if (Int32.Parse(hoGiaDinhVm.TV) >= 40 && Int32.Parse(hoGiaDinhVm.TV) < 50)
+            {
+                result = "Tôn vinh mức 40";
+            }
+            if (Int32.Parse(hoGiaDinhVm.TV) >= 50 && Int32.Parse(hoGiaDinhVm.TV) < 60)
+            {
+                result = "Tôn vinh mức 50";
+            }
+            if (Int32.Parse(hoGiaDinhVm.TV) >= 60 && Int32.Parse(hoGiaDinhVm.TV) < 70)
+            {
+                result = "Tôn vinh mức 60";
+            }
+            if (Int32.Parse(hoGiaDinhVm.TV) >= 70 && Int32.Parse(hoGiaDinhVm.TV) < 80)
+            {
+                result = "Tôn vinh mức 70";
+            }
+            if (Int32.Parse(hoGiaDinhVm.TV) >= 80 && Int32.Parse(hoGiaDinhVm.TV) < 90)
+            {
+                result = "Tôn vinh mức 80";
+            }
+            if (Int32.Parse(hoGiaDinhVm.TV) >= 90 && Int32.Parse(hoGiaDinhVm.TV) < 100)
+            {
+                result = "Tôn vinh mức 90";
+            }
+            if (Int32.Parse(hoGiaDinhVm.TV) >= 100)
+            {
+                result = "Tôn vinh mức 100";
+            }
+            return result; 
+
+        }
+
+        public string SumTV(List<NguoiHienMauVm> nguoiHienMauVms)
+        {
+            int SUM = 0;
+            foreach(var item in nguoiHienMauVms)
+            {
+                SUM = SUM + Int32.Parse(item.TV);
+            }
+            return SUM.ToString();
         }
 
         public NguoiHienMau createNguoiHienMau(NguoiHienMauVm nguoiHienMauVm, Guid DonviId, Guid DotTonVinhId)

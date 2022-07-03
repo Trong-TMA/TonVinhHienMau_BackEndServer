@@ -61,33 +61,26 @@
 
 
   <div class="steps-content" *ngIf="current === 1" >
-    <nz-table #basicTable [nzData]="listNguoihienmauimport">
+    <nz-table #basicTable [nzData]="listHogiadinhimport">
       <thead>
         <tr>
-          <th>STT</th>
-          <th>Họ và Tên</th>
-          <th>Giới tính</th>
-          <th>Năm sinh</th>
-          <th>Nghề nghiệp</th>
-          <th>Địa chỉ</th>
-          <th>Nhóm máu</th>
-          <th>Mức tôn vinh hiện tại</th>
-          <th>Mức tôn vinh đề xuất</th>
-          <th>Lưu ý</th>
+          <th>Tên chủ hộ</th>
+          <th>Số lần hiến</th>
+          <th>Mức tôn vinh đề nghị</th>
+          <th>Mức đã tôn vinh</th>
+          <th>Thao tác</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of basicTable.data; index as i;" >
-          <td class="col-sm-1" >{{i+1}}</td>
-          <td class="col-sm-2">{{item.hoTen}}</td>
-          <td class="col-sm-1">{{showGender(item.gioiTinh)}}</td>
-          <td class="col-sm-1">{{item.namSinh}}</td>
-          <td class="col-sm-2">{{item.ngheNghiep}}</td>
-          <td class="col-sm-2">{{item.diaChi}}</td>
-          <td class="col-sm-1">{{item.nhomMau}}</td>
-          <td class="col-sm-2">{{item.tv}}</td>
-          <td class="col-sm-2">{{item.tvdx}}</td>
-          <td class="col-sm-2">{{item.note}}</td>
+        <tr *ngFor="let item of basicTable.data; index as i;">
+          <td class="col-sm-2">{{item.tenGiaDinh}}</td>
+          <td>{{item.tv}}</td>
+          <td>{{item.tvdx}}</td>
+          <td>Chưa có</td>
+          <td>
+            <button pButton pRipple (click)="showModal(item)">Xem chi tiết</button>
+            <button pButton pRipple>Xóa</button>
+          </td>
         </tr>
       </tbody>
     </nz-table>
@@ -103,3 +96,34 @@
     </div>
   </div>
 
+<p-dialog header="Chỉnh sửa đợt tôn vinh" [(visible)]="isVisible" [modal]="true" [style]="{width: '50vw'}"
+  [draggable]="false" [resizable]="false">
+  <nz-table #basicTable [nzData]="listNguoihienmauimport">
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th>Họ và Tên</th>
+        <th>Giới tính</th>
+        <th>Năm sinh</th>
+        <th>Nghề nghiệp</th>
+        <th>Địa chỉ</th>
+        <th>Nhóm máu</th>
+        <th>Số lần hiến</th>
+        <th>Quan hệ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of basicTable.data; index as i;" >
+        <td class="col-sm-1" >{{i+1}}</td>
+        <td class="col-sm-2">{{item.hoTen}}</td>
+        <td class="col-sm-1">{{showGender(item.gioiTinh)}}</td>
+        <td class="col-sm-1">{{item.namSinh}}</td>
+        <td class="col-sm-2">{{item.ngheNghiep}}</td>
+        <td class="col-sm-2">{{item.diaChi}}</td>
+        <td class="col-sm-1">{{item.nhomMau}}</td>
+        <td class="col-sm-2">{{item.tv}}</td>
+        <td class="col-sm-2">{{item.note}}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</p-dialog>

@@ -1,3 +1,4 @@
+import { DialogModule } from 'primeng/dialog';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -37,7 +38,8 @@ const icons: IconDefinition[] = [
     NzButtonModule,
     FileUploadModule,
     NzTableModule,
-    NzSpinModule
+    NzSpinModule,
+    DialogModule
   ]
 })
 export class DeXuatHoGiaDinhModule { }
