@@ -29,6 +29,11 @@ export class DonViCreateComponent implements OnInit {
     this.donvi.diachi = this.validateForm.get("diachi")?.value;
     return this.donviService.createDonvi(this.donvi).subscribe((item)=>{
       this.loadDataEmit.emit();
+      this.validateForm = this.fb.group({
+        tendonvi: [null, [Validators.required]],
+        madonvi: [null, [Validators.required]],
+        diachi: [null],
+      });
     });
   }
 

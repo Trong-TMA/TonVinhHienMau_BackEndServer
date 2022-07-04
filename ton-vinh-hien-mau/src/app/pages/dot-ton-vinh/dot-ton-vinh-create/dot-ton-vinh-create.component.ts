@@ -22,13 +22,16 @@ export class DotTonVinhCreateComponent implements OnInit {
   submitForm(){
     return this.dottonvinhService.createDottonvinh(this.validateForm.get('madottonvinh')?.value).subscribe((item)=>{
       this.LoadDataEvent.emit();
+      this.validateForm = this.fb.group({
+        madottonvinh: [null, [Validators.required]]
+      });
     });
+
   }
 
   ngOnInit(){
     this.validateForm = this.fb.group({
       madottonvinh: [null, [Validators.required]]
-
     });
   }
 

@@ -9,7 +9,7 @@
   <div class="steps-content" *ngIf="current < 1"  >
     <form nz-form [formGroup]="validateForm" >
       <nz-form-item>
-        <nz-form-label [nzSpan]="7" nzRequired>Đợt tôn vinh</nz-form-label>
+        <nz-form-label [nzSpan]="7" nzRequired>Đợt thêm người hiến máu</nz-form-label>
         <nz-form-control [nzSpan]="12">
           <nz-select formControlName="dottonvinhid">
             <nz-option *ngFor="let item of dottonvinhs"
@@ -19,7 +19,7 @@
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label [nzSpan]="7" nzRequired>Đơn vị tôn vinh</nz-form-label>
+        <nz-form-label [nzSpan]="7" nzRequired>Đơn vị</nz-form-label>
         <nz-form-control [nzSpan]="12">
           <nz-select formControlName="donviid">
             <nz-option *ngFor="let item of donvis"

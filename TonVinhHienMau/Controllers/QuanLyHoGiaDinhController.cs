@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Net;
 using TonVinhHienMau.Data;
 using TonVinhHienMau.Services.Service;
 
@@ -25,6 +27,7 @@ namespace TonVinhHienMau.Controllers
 
         [HttpPost("Import")]
         [Consumes("multipart/form-data")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         public IActionResult Import(Guid DotTonVinhId, Guid DonviId, IFormFile file)
         {
             var result = _tonVinhHoGiaDinh.ImportExcel(_context, file, DonviId, DotTonVinhId);

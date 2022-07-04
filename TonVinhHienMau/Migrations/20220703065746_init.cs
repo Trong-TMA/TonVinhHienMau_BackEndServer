@@ -81,7 +81,7 @@ namespace TonVinhHienMau.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TenMQH = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
-                    GiaDinhId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -213,6 +213,7 @@ namespace TonVinhHienMau.Migrations
                     TV_90 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TV_100 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DonViId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MaChuHo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DotTonVinhId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>

@@ -48,6 +48,17 @@ export class DanhSachHienMauCreateComponent implements OnInit {
     this.isSpinning = true;
     this.nguoihienmauService.createNguoiHienMau(this.dottonvinid,this.donviid,this.nguoihienmau).subscribe((item)=>{
       this.loadDataEmit.emit();
+      this.validateForm = this.fb.group({
+        dottonvinhid:[null,[Validators.required]],
+        donviid:[null,[Validators.required]],
+        hoten: [null,[Validators.required]],
+        gioitinh: [true],
+        namsinh: [null,[Validators.required]],
+        nghenghiep: [null],
+        diachi: [null],
+        nhommau: [null,[Validators.required]],
+        tv: [null],
+      });
       this.router.navigate(["/Danh-sach-hien-mau"], {
         // skipLocationChange: true,
         // queryParams:{

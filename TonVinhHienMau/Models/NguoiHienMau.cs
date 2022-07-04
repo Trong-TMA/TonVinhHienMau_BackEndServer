@@ -63,5 +63,6 @@ namespace TonVinhHienMau.Models
         public Guid DotTonVinhId { get; set; }
         [ForeignKey("DotTonVinhId")]
         public virtual DotTonVinh DotTonVinhs { get; set; }
+
     }
 }

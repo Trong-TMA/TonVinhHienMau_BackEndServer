@@ -114,6 +114,9 @@ namespace TonVinhHienMau.Services.Implement
                     else
                     {
                         item.TV = getHightTV(_context, nguoiHM.Id).ToString();
+                        if (Int32.Parse(item.TV) == 0) {
+                            item.TV = "Chưa được tôn vinh";
+                        }
                         var data = getHightTV(_context, nguoiHM.Id);
                         var excel = getHightTVExcel(item);
 
@@ -223,6 +226,7 @@ namespace TonVinhHienMau.Services.Implement
             }
 
         }
+
         public int getHightTV(AppDbContext _context, Guid NguoiHienMauId)
         {
             var nguoihien = _context.NguoiHienMau.FirstOrDefault(u => u.Id.Equals(NguoiHienMauId));
